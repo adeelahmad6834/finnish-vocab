@@ -31,6 +31,7 @@ export const DEFAULT_CATEGORIES = [
   'verbs',
   'adjectives',
   'question words',
+  'pronouns',
   'spoken finnish',
   'other'
 ];
@@ -117,7 +118,18 @@ export const FINNISH_WORD_DICTIONARY = {
 
   // Spoken Finnish
   'mite': 'spoken finnish', 'miks': 'spoken finnish', 'mis': 'spoken finnish',
-  'millon': 'spoken finnish'
+  'millon': 'spoken finnish',
+
+  // Pronouns
+  'minä': 'pronouns', 'sinä': 'pronouns', 'hän': 'pronouns', 'se': 'pronouns',
+  'me': 'pronouns', 'te': 'pronouns', 'he': 'pronouns', 'ne': 'pronouns',
+  'minut': 'pronouns', 'sinut': 'pronouns', 'hänet': 'pronouns', 'sen': 'pronouns',
+  'meidät': 'pronouns', 'teidät': 'pronouns', 'heidät': 'pronouns',
+  'minun': 'pronouns', 'sinun': 'pronouns', 'hänen': 'pronouns',
+  'meidän': 'pronouns', 'teidän': 'pronouns', 'heidän': 'pronouns',
+  'tämä': 'pronouns', 'tuo': 'pronouns', 'nämä': 'pronouns', 'nuo': 'pronouns',
+  'itse': 'pronouns', 'joka': 'pronouns', 'joku': 'pronouns', 'jokin': 'pronouns',
+  'kaikki': 'pronouns', 'kukaan': 'pronouns', 'mitään': 'pronouns'
 };
 
 // English keywords for category detection
@@ -135,5 +147,6 @@ export const ENGLISH_CATEGORY_KEYWORDS = {
   'verbs': ['be', 'have', 'do', 'go', 'come', 'see', 'want', 'can', 'get', 'make', 'know', 'think', 'take', 'give', 'find', 'tell', 'say', 'speak', 'read', 'write', 'run', 'walk', 'sleep', 'eat', 'drink'],
   'adjectives': ['good', 'bad', 'big', 'small', 'new', 'old', 'young', 'beautiful', 'ugly', 'fast', 'slow', 'easy', 'hard', 'happy', 'sad', 'tired', 'hungry'],
   'question words': ['what', 'where', 'when', 'who', 'whom', 'why', 'how', 'which', 'how many', 'how much', 'how long', 'how often', 'how far', 'how old', 'how big', 'how fast'],
+  'pronouns': ['i', 'you', 'he', 'she', 'it', 'we', 'they', 'me', 'him', 'her', 'us', 'them', 'my', 'your', 'his', 'her', 'its', 'our', 'their', 'this', 'that', 'these', 'those', 'myself', 'yourself', 'himself', 'herself', 'itself', 'ourselves', 'themselves', 'who', 'which', 'someone', 'something', 'anyone', 'anything', 'everyone', 'everything', 'nobody', 'nothing', 'self', 'oneself'],
   'spoken finnish': ['spoken', 'colloquial', 'informal']
 };

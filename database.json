@@ -403,6 +403,396 @@
       "notes": "Spoken form of milloin",
       "addedAt": "2026-01-13T00:00:00.000Z",
       "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000040,
+      "finnish": ["minä", "mä"],
+      "english": "I",
+      "category": "pronouns",
+      "example": "Minä olen opiskelija. (I am a student.)",
+      "notes": "Subject pronoun. Spoken: mä. Often dropped as verb shows person.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000041,
+      "finnish": ["sinä", "sä"],
+      "english": "you (singular)",
+      "category": "pronouns",
+      "example": "Sinä olet kaunis. (You are beautiful.)",
+      "notes": "Subject pronoun singular. Spoken: sä.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000042,
+      "finnish": "hän",
+      "english": ["he", "she"],
+      "category": "pronouns",
+      "example": "Hän on opettaja. (He/She is a teacher.)",
+      "notes": "Same word for both genders. Formal/polite. In speech, often replaced by 'se'.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000043,
+      "finnish": "se",
+      "english": ["it", "he", "she"],
+      "category": "pronouns",
+      "example": "Se on hyvä. (It is good.) / Se tulee kohta. (He/She is coming soon.)",
+      "notes": "Used for objects AND people in spoken Finnish. Normal and not rude.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000044,
+      "finnish": "me",
+      "english": "we",
+      "category": "pronouns",
+      "example": "Me olemme ystäviä. (We are friends.)",
+      "notes": "Subject pronoun. Same in standard and spoken Finnish.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000045,
+      "finnish": "te",
+      "english": ["you (plural)", "you (formal)"],
+      "category": "pronouns",
+      "example": "Te olette tervetulleita. (You are welcome.)",
+      "notes": "Plural OR formal singular (customer service, official situations).",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000046,
+      "finnish": ["he", "ne"],
+      "english": "they",
+      "category": "pronouns",
+      "example": "He tulevat huomenna. (They are coming tomorrow.)",
+      "notes": "he = standard/formal, ne = spoken. ne also used for objects.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000047,
+      "finnish": "minut",
+      "english": "me",
+      "category": "pronouns",
+      "example": "Hän näki minut. (He/She saw me.)",
+      "notes": "Object form of minä. Used when 'I' receives the action.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000048,
+      "finnish": "sinut",
+      "english": "you (object)",
+      "category": "pronouns",
+      "example": "Minä rakastan sinut. (I love you.)",
+      "notes": "Object form of sinä.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000049,
+      "finnish": "hänet",
+      "english": ["him", "her"],
+      "category": "pronouns",
+      "example": "Näin hänet eilen. (I saw him/her yesterday.)",
+      "notes": "Object form of hän. Same word for both genders.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000050,
+      "finnish": "sen",
+      "english": "it (object)",
+      "category": "pronouns",
+      "example": "Otan sen. (I'll take it.)",
+      "notes": "Object form of se. Also used for people in spoken Finnish.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000051,
+      "finnish": "meidät",
+      "english": "us",
+      "category": "pronouns",
+      "example": "Hän kutsui meidät. (He/She invited us.)",
+      "notes": "Object form of me.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000052,
+      "finnish": "teidät",
+      "english": "you (plural, object)",
+      "category": "pronouns",
+      "example": "Näen teidät huomenna. (I'll see you tomorrow.)",
+      "notes": "Object form of te.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000053,
+      "finnish": ["heidät", "ne"],
+      "english": "them",
+      "category": "pronouns",
+      "example": "Tapaan heidät myöhemmin. (I'll meet them later.)",
+      "notes": "heidät = formal, ne = spoken/objects.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000054,
+      "finnish": ["minun", "mun"],
+      "english": "my",
+      "category": "pronouns",
+      "example": "Minun nimi on... (My name is...)",
+      "notes": "Possessive. Spoken: mun. Often dropped when possession is clear.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000055,
+      "finnish": ["sinun", "sun"],
+      "english": "your (singular)",
+      "category": "pronouns",
+      "example": "Sinun auto on hieno. (Your car is nice.)",
+      "notes": "Possessive singular. Spoken: sun.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000056,
+      "finnish": "hänen",
+      "english": ["his", "her"],
+      "category": "pronouns",
+      "example": "Hänen talo on suuri. (His/Her house is big.)",
+      "notes": "Possessive. Same word for both genders.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000057,
+      "finnish": "sen",
+      "english": "its",
+      "category": "pronouns",
+      "example": "Sen väri on punainen. (Its color is red.)",
+      "notes": "Possessive for objects. Also used for people in spoken Finnish.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000058,
+      "finnish": "meidän",
+      "english": "our",
+      "category": "pronouns",
+      "example": "Meidän koti on täällä. (Our home is here.)",
+      "notes": "Possessive plural.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000059,
+      "finnish": "teidän",
+      "english": "your (plural)",
+      "category": "pronouns",
+      "example": "Teidän lapset ovat kilttejä. (Your children are nice.)",
+      "notes": "Possessive plural/formal.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000060,
+      "finnish": ["heidän", "niiden"],
+      "english": "their",
+      "category": "pronouns",
+      "example": "Heidän koira on iso. (Their dog is big.)",
+      "notes": "heidän = people, niiden = objects/spoken.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000061,
+      "finnish": "tämä",
+      "english": "this",
+      "category": "pronouns",
+      "example": "Tämä on hyvä. (This is good.)",
+      "notes": "Demonstrative - near/pointing. In real life, 'se' is used more often.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000062,
+      "finnish": "tuo",
+      "english": "that (visible)",
+      "category": "pronouns",
+      "example": "Tuo on kaunis. (That is beautiful.)",
+      "notes": "Demonstrative - visible but farther away.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000063,
+      "finnish": "nämä",
+      "english": "these",
+      "category": "pronouns",
+      "example": "Nämä ovat minun. (These are mine.)",
+      "notes": "Demonstrative plural - near.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000064,
+      "finnish": "nuo",
+      "english": "those (visible)",
+      "category": "pronouns",
+      "example": "Nuo ovat kalliita. (Those are expensive.)",
+      "notes": "Demonstrative plural - farther away.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000065,
+      "finnish": "ne",
+      "english": ["those", "they (things)"],
+      "category": "pronouns",
+      "example": "Ne ovat pöydällä. (Those/They are on the table.)",
+      "notes": "Most common in real speech for 'those' and 'they'.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000066,
+      "finnish": "itse",
+      "english": ["myself", "yourself", "oneself", "self"],
+      "category": "pronouns",
+      "example": "Teen sen itse. (I'll do it myself.)",
+      "notes": "Reflexive/emphatic. Same word for all persons.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000067,
+      "finnish": "joka",
+      "english": ["who", "which", "that"],
+      "category": "pronouns",
+      "example": "Mies, joka tuli... (The man who came...)",
+      "notes": "Relative pronoun. One word replaces English who/which/that.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000068,
+      "finnish": "joku",
+      "english": "someone",
+      "category": "pronouns",
+      "example": "Joku soitti. (Someone called.)",
+      "notes": "Indefinite - unknown person.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000069,
+      "finnish": "jokin",
+      "english": "something",
+      "category": "pronouns",
+      "example": "Jokin tapahtui. (Something happened.)",
+      "notes": "Indefinite - unknown thing.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000070,
+      "finnish": "kuka tahansa",
+      "english": "anyone",
+      "category": "pronouns",
+      "example": "Kuka tahansa voi tehdä sen. (Anyone can do it.)",
+      "notes": "Indefinite - doesn't matter who.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000071,
+      "finnish": "mikä tahansa",
+      "english": "anything",
+      "category": "pronouns",
+      "example": "Mikä tahansa käy. (Anything goes.)",
+      "notes": "Indefinite - doesn't matter what.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000072,
+      "finnish": "kaikki",
+      "english": ["everyone", "everything", "all"],
+      "category": "pronouns",
+      "example": "Kaikki ovat täällä. (Everyone is here.)",
+      "notes": "Can mean everyone, everything, or all depending on context.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000073,
+      "finnish": "ei kukaan",
+      "english": "nobody",
+      "category": "pronouns",
+      "example": "Ei kukaan tiedä. (Nobody knows.)",
+      "notes": "Finnish uses double negative structure.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000074,
+      "finnish": "ei mitään",
+      "english": "nothing",
+      "category": "pronouns",
+      "example": "Ei mitään hätää. (Nothing to worry about.)",
+      "notes": "Finnish uses double negative structure.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000075,
+      "finnish": "mä",
+      "english": "I",
+      "category": "spoken finnish",
+      "example": "Mä tuun kohta. (I'm coming soon.)",
+      "notes": "Spoken form of minä. Very common in daily speech.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000076,
+      "finnish": "sä",
+      "english": "you",
+      "category": "spoken finnish",
+      "example": "Sä oot kiva. (You're nice.)",
+      "notes": "Spoken form of sinä. Very common in daily speech.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000077,
+      "finnish": "mun",
+      "english": "my",
+      "category": "spoken finnish",
+      "example": "Mun kaveri tulee. (My friend is coming.)",
+      "notes": "Spoken form of minun.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000078,
+      "finnish": "sun",
+      "english": "your",
+      "category": "spoken finnish",
+      "example": "Sun puhelin soi. (Your phone is ringing.)",
+      "notes": "Spoken form of sinun.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
     }
   ],
   "categories": [
@@ -419,6 +809,7 @@
     "verbs",
     "adjectives",
     "question words",
+    "pronouns",
     "spoken finnish",
     "other"
   ]
