@@ -1,6 +1,9 @@
 # Dependencies
 node_modules/
 
+# Personal learning progress (NOT tracked - private to each user)
+vocabulary.json
+
 # Backups (contains personal progress data)
 backups/
 
@@ -16,3 +19,6 @@ daily-goals.json
 
 # CSV exports
 *.csv
+
+# Old format backup (from migration)
+vocabulary.json.backup-premigration

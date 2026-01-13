@@ -37,7 +37,14 @@ export function createBackup(type = 'manual') {
 
   let backedUp = [];
 
-  // Backup vocabulary.json
+  // Backup database.json (word definitions)
+  const databaseSource = path.join(ROOT_DIR, 'database.json');
+  if (fs.existsSync(databaseSource)) {
+    fs.copyFileSync(databaseSource, path.join(backupPath, 'database.json'));
+    backedUp.push('database.json');
+  }
+
+  // Backup vocabulary.json (personal progress)
   const vocabSource = path.join(ROOT_DIR, 'vocabulary.json');
   if (fs.existsSync(vocabSource)) {
     fs.copyFileSync(vocabSource, path.join(backupPath, 'vocabulary.json'));
@@ -131,6 +138,13 @@ export function restoreBackup(backupName) {
   }
 
   const restored = [];
+
+  // Restore database.json
+  const databaseBackup = path.join(backupPath, 'database.json');
+  if (fs.existsSync(databaseBackup)) {
+    fs.copyFileSync(databaseBackup, path.join(ROOT_DIR, 'database.json'));
+    restored.push('database.json');
+  }
 
   // Restore vocabulary.json
   const vocabBackup = path.join(backupPath, 'vocabulary.json');

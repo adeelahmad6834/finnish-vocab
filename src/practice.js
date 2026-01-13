@@ -1,4 +1,4 @@
-import { getWordsForPractice, saveData } from './data.js';
+import { getWordsForPractice, saveVocabulary } from './data.js';
 import {
   calculateQuality, calculateSM2Review, getWordsDueForReview,
   formatNextReview, updateWordStats, getWordPriority
@@ -13,9 +13,11 @@ export async function practiceMode(data) {
   clearScreen();
   console.log(chalk.cyan.bold('\n=== Practice Mode ===\n'));
 
-  const unmasteredCount = data.words.filter(w => !w.mastered).length;
-  const masteredCount = data.words.filter(w => w.mastered).length;
-  const dueForReview = getWordsDueForReview(data.words, false);
+  // Only practice words user is learning
+  const learningWords = data.words.filter(w => w.isLearning);
+  const unmasteredCount = learningWords.filter(w => !w.mastered).length;
+  const masteredCount = learningWords.filter(w => w.mastered).length;
+  const dueForReview = getWordsDueForReview(learningWords, false);
 
   console.log(chalk.gray(`Words to learn: ${unmasteredCount} | Mastered: ${masteredCount}`));
   if (dueForReview.length > 0) {
@@ -24,8 +26,9 @@ export async function practiceMode(data) {
     console.log(chalk.green(`All caught up on reviews!\n`));
   }
 
-  if (data.words.length === 0) {
-    console.log(chalk.yellow('No words to practice. Add some words first!'));
+  if (learningWords.length === 0) {
+    console.log(chalk.yellow('No words in your learning list!'));
+    console.log(chalk.gray('Use "Browse database" to add words to learn.'));
     await pause();
     return;
   }
@@ -57,7 +60,7 @@ export async function practiceMode(data) {
   const includeMastered = mode === 'review';
   let wordsToUse = mode === 'sm2-review'
     ? dueForReview
-    : getWordsForPractice(data.words, includeMastered);
+    : getWordsForPractice(data, includeMastered);
 
   if (wordsToUse.length === 0) {
     console.log(chalk.yellow('\nNo words available for this mode.'));
@@ -85,12 +88,13 @@ export async function practiceMode(data) {
   wordsToUse = wordsToUse.slice(0, count);
 
   // Run practice session
-  const result = await runPracticeSession(wordsToUse, mode);
+  const result = await runPracticeSession(wordsToUse, mode, data);
 
-  // Update stats
-  data.stats.totalPracticeSessions++;
-  data.stats.lastPracticeDate = new Date().toISOString();
-  saveData(data);
+  // Update stats (save to vocabulary only)
+  data._vocabulary.stats.totalPracticeSessions++;
+  data._vocabulary.stats.lastPracticeDate = new Date().toISOString();
+  data.stats = data._vocabulary.stats;
+  saveVocabulary(data._vocabulary);
   updateDailyGoalsPractice(result.total, result.correct);
 
   // Display results
@@ -100,7 +104,7 @@ export async function practiceMode(data) {
 }
 
 // Run a practice session with given words
-async function runPracticeSession(words, mode) {
+async function runPracticeSession(words, mode, data) {
   let correct = 0;
   const total = words.length;
   const newlyMastered = [];
@@ -111,7 +115,7 @@ async function runPracticeSession(words, mode) {
   for (let i = 0; i < words.length; i++) {
     const word = words[i];
     const direction = getDirection(word, mode);
-    const result = await askQuestion(word, direction, i + 1, total);
+    const result = await askQuestion(word, direction, i + 1, total, data);
 
     if (result.quit) {
       console.log(chalk.gray('\nPractice ended early.'));
@@ -168,7 +172,7 @@ function checkAnswer(userAnswer, validAnswers) {
 }
 
 // Ask a single question and process the answer
-async function askQuestion(word, direction, current, total) {
+async function askQuestion(word, direction, current, total, data) {
   const questionField = direction === 'fi-en' ? word.finnish : word.english;
   const answerField = direction === 'fi-en' ? word.english : word.finnish;
   const question = getDisplayString(questionField);
@@ -189,12 +193,38 @@ async function askQuestion(word, direction, current, total) {
   const isCorrect = checkAnswer(userAnswer, answerField);
   const masteryStatus = updateWordStats(word, direction, isCorrect);
 
+  // Sync progress to learning entry in vocabulary
+  const entry = data._vocabulary.learningEntries.find(e => e.wordId === word.id);
+  if (entry) {
+    entry.mastered = word.mastered;
+    entry.masteredAt = word.masteredAt;
+    entry.practiceCount = word.practiceCount;
+    entry.correctCount = word.correctCount;
+    entry.streakFiEn = word.streakFiEn;
+    entry.streakEnFi = word.streakEnFi;
+    entry.attemptsFiEn = word.attemptsFiEn;
+    entry.attemptsEnFi = word.attemptsEnFi;
+    entry.correctFiEn = word.correctFiEn;
+    entry.correctEnFi = word.correctEnFi;
+    entry.lastPracticedFiEn = word.lastPracticedFiEn;
+    entry.lastPracticedEnFi = word.lastPracticedEnFi;
+  }
+
   // Calculate SM-2 review scheduling
   const streakBefore = direction === 'fi-en'
     ? (word.streakFiEn || 0) - (isCorrect ? 1 : 0)
     : (word.streakEnFi || 0) - (isCorrect ? 1 : 0);
   const quality = calculateQuality(isCorrect, Math.max(0, streakBefore));
   const sm2Result = calculateSM2Review(word, quality);
+
+  // Sync SM-2 fields to learning entry
+  if (entry) {
+    entry.easeFactor = word.easeFactor;
+    entry.interval = word.interval;
+    entry.repetitions = word.repetitions;
+    entry.nextReviewDate = word.nextReviewDate;
+    entry.lastReviewed = word.lastReviewed;
+  }
 
   // Get display string for correct answer (show all options if array)
   const correctAnswerDisplay = Array.isArray(answerField)
@@ -224,6 +254,11 @@ function displayFeedback(word, direction, isCorrect, masteryStatus, sm2Result, c
   }
 }
 
+// Helper to format field for display
+function formatField(value) {
+  return Array.isArray(value) ? value.join(' / ') : value;
+}
+
 // Display final practice results
 function displayPracticeResults(result, data) {
   const { correct, total, newlyMastered } = result;
@@ -237,11 +272,12 @@ function displayPracticeResults(result, data) {
   if (newlyMastered.length > 0) {
     console.log(chalk.magenta.bold(`\n* Newly Mastered (${newlyMastered.length}):`));
     newlyMastered.forEach(w => {
-      console.log(chalk.magenta(`  - ${w.finnish} (${w.english})`));
+      console.log(chalk.magenta(`  - ${formatField(w.finnish)} (${formatField(w.english)})`));
     });
   }
 
-  const remainingToLearn = data.words.filter(w => !w.mastered).length;
+  const learningWords = data.words.filter(w => w.isLearning);
+  const remainingToLearn = learningWords.filter(w => !w.mastered).length;
   if (remainingToLearn > 0) {
     console.log(chalk.gray(`\nWords still learning: ${remainingToLearn}`));
   } else {

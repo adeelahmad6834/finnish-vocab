@@ -6,8 +6,12 @@ const __dirname = path.dirname(__filename);
 const ROOT_DIR = path.join(__dirname, '..');
 
 // File paths
-export const DATA_FILE = path.join(ROOT_DIR, 'vocabulary.json');
+export const DATABASE_FILE = path.join(ROOT_DIR, 'database.json');
+export const VOCABULARY_FILE = path.join(ROOT_DIR, 'vocabulary.json');
 export const DAILY_GOALS_FILE = path.join(ROOT_DIR, 'daily-goals.json');
+
+// Legacy file path (for migration)
+export const LEGACY_DATA_FILE = path.join(ROOT_DIR, 'vocabulary.json');
 
 // Pagination
 export const PAGE_SIZE = 10;

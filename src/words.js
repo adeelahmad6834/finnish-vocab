@@ -1,10 +1,18 @@
-import { saveData } from './data.js';
+import {
+  saveData, saveDatabase, saveVocabulary, addToLearning, removeFromLearning,
+  findLearningEntry, updateLearningEntry
+} from './data.js';
 import { updateDailyGoalsWordAdded } from './dailyGoals.js';
 import { detectCategory } from './categories.js';
 import {
   clearScreen, numberedMenu, numberedMultiSelect, displayWordsTable,
   pause, chalk, inquirer
 } from './ui.js';
+
+// Helper to get display string for a field (may be string or array)
+function formatField(value) {
+  return Array.isArray(value) ? value.join(' / ') : value;
+}
 
 // Add a new word
 export async function addWord(data) {
@@ -29,6 +37,44 @@ export async function addWord(data) {
     }
   ]);
 
+  // Check if word exists in database
+  const existsInDb = data._database.words.find(w => {
+    const finnishVals = Array.isArray(w.finnish) ? w.finnish : [w.finnish];
+    return finnishVals.some(f => f.toLowerCase() === finnish.toLowerCase().trim());
+  });
+
+  if (existsInDb) {
+    // Word exists in database
+    const isLearning = data._vocabulary.learningEntries.some(e => e.wordId === existsInDb.id);
+
+    if (isLearning) {
+      console.log(chalk.yellow(`\nYou're already learning "${finnish}"!`));
+      const { update } = await inquirer.prompt([
+        { type: 'input', name: 'update', message: 'Update the definition? (y/N):' }
+      ]);
+
+      if (update.toLowerCase() === 'y') {
+        existsInDb.english = english.trim();
+        existsInDb.updatedAt = new Date().toISOString();
+        saveDatabase(data._database);
+        console.log(chalk.green('\nDefinition updated!'));
+      }
+    } else {
+      console.log(chalk.yellow(`\n"${finnish}" exists in database but you're not learning it.`));
+      const { startLearning } = await inquirer.prompt([
+        { type: 'input', name: 'startLearning', message: 'Start learning this word? (Y/n):' }
+      ]);
+
+      if (startLearning.toLowerCase() !== 'n') {
+        addToLearning(data, existsInDb.id);
+        console.log(chalk.green(`\nAdded "${finnish}" to your learning list!`));
+      }
+    }
+    await pause();
+    return;
+  }
+
+  // New word - proceed with full creation
   // Try to auto-detect category
   const detectedCategory = detectCategory(finnish, english);
   let category;
@@ -63,7 +109,8 @@ export async function addWord(data) {
       }
     ]);
     category = newCategory.toLowerCase().trim();
-    if (!data.categories.includes(category)) {
+    if (!data._database.categories.includes(category)) {
+      data._database.categories.push(category);
       data.categories.push(category);
     }
   }
@@ -76,62 +123,139 @@ export async function addWord(data) {
     { type: 'input', name: 'notes', message: 'Notes (optional):' }
   ]);
 
-  // Check for existing word (handle array fields)
-  const exists = data.words.find(w => {
-    const finnishVals = Array.isArray(w.finnish) ? w.finnish : [w.finnish];
-    return finnishVals.some(f => f.toLowerCase() === finnish.toLowerCase().trim());
+  // Create new word in database
+  const newWord = {
+    id: Date.now(),
+    finnish: finnish.trim(),
+    english: english.trim(),
+    category,
+    example: example.trim(),
+    notes: notes.trim(),
+    addedAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  };
+
+  data._database.words.push(newWord);
+  saveDatabase(data._database);
+
+  // Add to merged words list
+  data.words.push({
+    ...newWord,
+    isLearning: false,
+    mastered: false,
+    practiceCount: 0,
+    correctCount: 0
   });
 
-  if (exists) {
-    console.log(chalk.yellow(`\nWord "${finnish}" already exists!`));
-    const { update } = await inquirer.prompt([
-      {
-        type: 'confirm',
-        name: 'update',
-        message: 'Do you want to update it?',
-        default: false
-      }
-    ]);
+  // Auto-add to learning
+  addToLearning(data, newWord.id);
 
-    if (update) {
-      exists.english = english.trim();
-      exists.category = category;
-      exists.example = example.trim();
-      exists.notes = notes.trim();
-      exists.updatedAt = new Date().toISOString();
-      saveData(data);
-      console.log(chalk.green('\nWord updated successfully!'));
-    }
-  } else {
-    const newWord = {
-      id: Date.now(),
-      finnish: finnish.trim(),
-      english: english.trim(),
-      category,
-      example: example.trim(),
-      notes: notes.trim(),
-      mastered: false,
-      practiceCount: 0,
-      correctCount: 0,
-      addedAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+  updateDailyGoalsWordAdded();
+  console.log(chalk.green(`\n"${newWord.finnish}" added to database and your learning list!`));
+
+  await pause();
+}
+
+// Browse database - view all words and add to learning
+export async function browseDatabase(data) {
+  clearScreen();
+  console.log(chalk.cyan.bold('\n=== Browse Word Database ===\n'));
+
+  const dbWords = data._database.words;
+
+  if (dbWords.length === 0) {
+    console.log(chalk.yellow('No words in database yet.'));
+    await pause();
+    return;
+  }
+
+  // Enrich with learning status
+  const enrichedWords = dbWords.map(w => {
+    const isLearning = data._vocabulary.learningEntries.some(e => e.wordId === w.id);
+    const entry = data._vocabulary.learningEntries.find(e => e.wordId === w.id);
+    return {
+      ...w,
+      isLearning,
+      mastered: entry?.mastered || false,
+      practiceCount: entry?.practiceCount || 0,
+      correctCount: entry?.correctCount || 0
     };
+  });
 
-    data.words.push(newWord);
-    data.stats.totalWordsAdded++;
-    saveData(data);
-    updateDailyGoalsWordAdded();
-    console.log(chalk.green(`\n"${newWord.finnish}" added successfully!`));
+  const learningCount = enrichedWords.filter(w => w.isLearning).length;
+  const notLearningCount = enrichedWords.filter(w => !w.isLearning).length;
+
+  console.log(chalk.gray(`Total: ${dbWords.length} | Learning: ${learningCount} | Not started: ${notLearningCount}\n`));
+
+  const action = await numberedMenu('What to view?', [
+    { name: `All words (${dbWords.length})`, value: 'all' },
+    { name: `Words I'm learning (${learningCount})`, value: 'learning' },
+    { name: `Words not started (${notLearningCount})`, value: 'not_learning' },
+    { name: 'Add words to learning list', value: 'add' },
+    { name: 'Back', value: 'back' }
+  ]);
+
+  if (action === 'back' || !action) return;
+
+  if (action === 'all') {
+    await displayWordsTable(enrichedWords);
+  } else if (action === 'learning') {
+    const learningWords = enrichedWords.filter(w => w.isLearning);
+    await displayWordsTable(learningWords);
+  } else if (action === 'not_learning') {
+    const notLearning = enrichedWords.filter(w => !w.isLearning);
+    if (notLearning.length === 0) {
+      console.log(chalk.green('\nYou\'re learning all words in the database!'));
+    } else {
+      await displayWordsTable(notLearning);
+    }
+  } else if (action === 'add') {
+    await addToLearningBulk(data, enrichedWords);
   }
 
   await pause();
 }
 
-// List all words
+// Add multiple words to learning list
+async function addToLearningBulk(data, enrichedWords) {
+  const notLearning = enrichedWords.filter(w => !w.isLearning);
+
+  if (notLearning.length === 0) {
+    console.log(chalk.green('\nYou\'re already learning all words!'));
+    return;
+  }
+
+  const wordChoices = notLearning.map(w => ({
+    name: `${formatField(w.finnish)} - ${formatField(w.english)} [${w.category}]`,
+    value: w.id
+  }));
+
+  const selectedIds = await numberedMultiSelect(
+    'Select words to start learning (or "all"):',
+    wordChoices
+  );
+
+  if (selectedIds.length > 0) {
+    selectedIds.forEach(id => {
+      addToLearning(data, id);
+    });
+    console.log(chalk.green(`\nAdded ${selectedIds.length} word(s) to your learning list!`));
+  }
+}
+
+// List all words (only learning words)
 export async function listAllWords(data) {
   clearScreen();
-  console.log(chalk.cyan.bold('\n=== All Words ===\n'));
-  await displayWordsTable(data.words);
+  console.log(chalk.cyan.bold('\n=== My Learning Words ===\n'));
+
+  const learningWords = data.words.filter(w => w.isLearning);
+
+  if (learningWords.length === 0) {
+    console.log(chalk.yellow('No words in your learning list yet.'));
+    console.log(chalk.gray('Use "Browse database" to add words to your learning list.'));
+  } else {
+    await displayWordsTable(learningWords);
+  }
   await pause();
 }
 
@@ -140,15 +264,17 @@ export async function listByCategory(data) {
   clearScreen();
   console.log(chalk.cyan.bold('\n=== List by Category ===\n'));
 
+  const learningWords = data.words.filter(w => w.isLearning);
+
   const categoriesWithCounts = data.categories
     .map(cat => {
-      const count = data.words.filter(w => w.category === cat).length;
+      const count = learningWords.filter(w => w.category === cat).length;
       return { name: `${cat} (${count} words)`, value: cat, count };
     })
     .filter(c => c.count > 0);
 
   if (categoriesWithCounts.length === 0) {
-    console.log(chalk.yellow('No words added yet.'));
+    console.log(chalk.yellow('No words in your learning list yet.'));
     await pause();
     return;
   }
@@ -162,7 +288,7 @@ export async function listByCategory(data) {
 
   if (category === 'back' || category === null) return;
 
-  const words = data.words.filter(w => w.category === category);
+  const words = learningWords.filter(w => w.category === category);
   console.log(chalk.cyan.bold(`\n=== ${category.toUpperCase()} ===\n`));
   await displayWordsTable(words, false);
   await pause();
@@ -172,6 +298,14 @@ export async function listByCategory(data) {
 export async function listAlphabetically(data) {
   clearScreen();
   console.log(chalk.cyan.bold('\n=== Words (Alphabetical) ===\n'));
+
+  const learningWords = data.words.filter(w => w.isLearning);
+
+  if (learningWords.length === 0) {
+    console.log(chalk.yellow('No words in your learning list yet.'));
+    await pause();
+    return;
+  }
 
   const sortBy = await numberedMenu('Sort by:', [
     { name: 'Finnish (A-Z)', value: 'finnish-asc' },
@@ -183,7 +317,7 @@ export async function listAlphabetically(data) {
   if (!sortBy) return;
 
   const [field, order] = sortBy.split('-');
-  const sorted = [...data.words].sort((a, b) => {
+  const sorted = [...learningWords].sort((a, b) => {
     // Handle fields that may be arrays (use first element for sorting)
     const aVal = Array.isArray(a[field]) ? a[field][0] : a[field];
     const bVal = Array.isArray(b[field]) ? b[field][0] : b[field];
@@ -210,7 +344,9 @@ export async function searchWords(data) {
   ]);
 
   const searchTerm = query.toLowerCase().trim();
-  const results = data.words.filter(w => {
+
+  // Search in all database words
+  const results = data._database.words.filter(w => {
     // Handle finnish field (may be string or array)
     const finnishMatch = Array.isArray(w.finnish)
       ? w.finnish.some(f => f.toLowerCase().includes(searchTerm))
@@ -219,7 +355,7 @@ export async function searchWords(data) {
     const englishMatch = Array.isArray(w.english)
       ? w.english.some(e => e.toLowerCase().includes(searchTerm))
       : w.english.toLowerCase().includes(searchTerm);
-    const notesMatch = w.notes.toLowerCase().includes(searchTerm);
+    const notesMatch = w.notes?.toLowerCase().includes(searchTerm) || false;
     return finnishMatch || englishMatch || notesMatch;
   });
 
@@ -228,26 +364,37 @@ export async function searchWords(data) {
   if (results.length === 0) {
     console.log(chalk.yellow('No words found.'));
   } else {
-    await displayWordsTable(results);
+    // Enrich with learning status
+    const enrichedResults = results.map(w => {
+      const entry = data._vocabulary.learningEntries.find(e => e.wordId === w.id);
+      return {
+        ...w,
+        isLearning: !!entry,
+        mastered: entry?.mastered || false,
+        practiceCount: entry?.practiceCount || 0,
+        correctCount: entry?.correctCount || 0
+      };
+    });
+    await displayWordsTable(enrichedResults);
   }
 
   await pause();
 }
 
-// Edit a word
+// Edit a word (updates database only, preserves progress)
 export async function editWord(data) {
   clearScreen();
   console.log(chalk.cyan.bold('\n=== Edit Word ===\n'));
 
-  if (data.words.length === 0) {
+  if (data._database.words.length === 0) {
     console.log(chalk.yellow('No words to edit.'));
     await pause();
     return;
   }
 
-  const wordChoices = data.words.map(w => {
-    const finnish = Array.isArray(w.finnish) ? w.finnish.join(' / ') : w.finnish;
-    const english = Array.isArray(w.english) ? w.english.join(' / ') : w.english;
+  const wordChoices = data._database.words.map(w => {
+    const finnish = formatField(w.finnish);
+    const english = formatField(w.english);
     return {
       name: `${finnish} - ${english} [${w.category}]`,
       value: w
@@ -259,8 +406,8 @@ export async function editWord(data) {
   if (!word) return;
 
   // Get display values for defaults (handle arrays)
-  const finnishDefault = Array.isArray(word.finnish) ? word.finnish.join(' / ') : word.finnish;
-  const englishDefault = Array.isArray(word.english) ? word.english.join(' / ') : word.english;
+  const finnishDefault = formatField(word.finnish);
+  const englishDefault = formatField(word.english);
 
   const { finnish } = await inquirer.prompt([
     { type: 'input', name: 'finnish', message: 'Finnish word:', default: finnishDefault }
@@ -279,6 +426,7 @@ export async function editWord(data) {
     { type: 'input', name: 'notes', message: 'Notes:', default: word.notes }
   ]);
 
+  // Update in database only
   word.finnish = finnish.trim();
   word.english = english.trim();
   word.category = category || word.category;
@@ -286,8 +434,20 @@ export async function editWord(data) {
   word.notes = notes.trim();
   word.updatedAt = new Date().toISOString();
 
-  saveData(data);
-  console.log(chalk.green('\nWord updated successfully!'));
+  saveDatabase(data._database);
+
+  // Also update in merged words list
+  const mergedWord = data.words.find(w => w.id === word.id);
+  if (mergedWord) {
+    mergedWord.finnish = word.finnish;
+    mergedWord.english = word.english;
+    mergedWord.category = word.category;
+    mergedWord.example = word.example;
+    mergedWord.notes = word.notes;
+    mergedWord.updatedAt = word.updatedAt;
+  }
+
+  console.log(chalk.green('\nWord updated! Your learning progress is preserved.'));
   await pause();
 }
 
@@ -296,17 +456,19 @@ export async function deleteWord(data) {
   clearScreen();
   console.log(chalk.cyan.bold('\n=== Delete Word ===\n'));
 
-  if (data.words.length === 0) {
+  if (data._database.words.length === 0) {
     console.log(chalk.yellow('No words to delete.'));
     await pause();
     return;
   }
 
-  const wordChoices = data.words.map(w => {
-    const finnish = Array.isArray(w.finnish) ? w.finnish.join(' / ') : w.finnish;
-    const english = Array.isArray(w.english) ? w.english.join(' / ') : w.english;
+  const wordChoices = data._database.words.map(w => {
+    const finnish = formatField(w.finnish);
+    const english = formatField(w.english);
+    const isLearning = data._vocabulary.learningEntries.some(e => e.wordId === w.id);
+    const badge = isLearning ? chalk.green(' [Learning]') : '';
     return {
-      name: `${finnish} - ${english}`,
+      name: `${finnish} - ${english}${badge}`,
       value: w
     };
   });
@@ -315,20 +477,58 @@ export async function deleteWord(data) {
 
   if (!word) return;
 
-  const { confirm } = await inquirer.prompt([
-    {
-      type: 'input',
-      name: 'confirm',
-      message: `Type "yes" to delete "${word.finnish}":`
-    }
-  ]);
+  const hasProgress = data._vocabulary.learningEntries.some(e => e.wordId === word.id);
 
-  if (confirm.toLowerCase() === 'yes') {
-    data.words = data.words.filter(w => w.id !== word.id);
-    saveData(data);
-    console.log(chalk.green('\nWord deleted successfully!'));
+  if (hasProgress) {
+    const action = await numberedMenu(
+      `"${formatField(word.finnish)}" has learning progress. What to do?`,
+      [
+        { name: 'Remove from my learning only (keep in database)', value: 'learning_only' },
+        { name: 'Delete from database only (keep my progress as orphan)', value: 'db_only' },
+        { name: 'Delete completely (database AND my progress)', value: 'both' },
+        { name: 'Cancel', value: 'cancel' }
+      ]
+    );
+
+    if (action === 'cancel' || !action) return;
+
+    if (action === 'learning_only') {
+      removeFromLearning(data, word.id);
+      console.log(chalk.green('\nRemoved from your learning list. Word still exists in database.'));
+    } else if (action === 'db_only') {
+      data._database.words = data._database.words.filter(w => w.id !== word.id);
+      data.words = data.words.filter(w => w.id !== word.id);
+      saveDatabase(data._database);
+      console.log(chalk.yellow('\nDeleted from database. Your progress is orphaned.'));
+    } else if (action === 'both') {
+      const { confirm } = await inquirer.prompt([
+        { type: 'input', name: 'confirm', message: 'Type "yes" to confirm deletion:' }
+      ]);
+
+      if (confirm.toLowerCase() === 'yes') {
+        data._database.words = data._database.words.filter(w => w.id !== word.id);
+        data.words = data.words.filter(w => w.id !== word.id);
+        removeFromLearning(data, word.id);
+        saveDatabase(data._database);
+        console.log(chalk.green('\nWord and progress deleted completely.'));
+      } else {
+        console.log(chalk.gray('\nDeletion cancelled.'));
+      }
+    }
   } else {
-    console.log(chalk.gray('\nDeletion cancelled.'));
+    // No progress, simple delete
+    const { confirm } = await inquirer.prompt([
+      { type: 'input', name: 'confirm', message: `Type "yes" to delete "${formatField(word.finnish)}":` }
+    ]);
+
+    if (confirm.toLowerCase() === 'yes') {
+      data._database.words = data._database.words.filter(w => w.id !== word.id);
+      data.words = data.words.filter(w => w.id !== word.id);
+      saveDatabase(data._database);
+      console.log(chalk.green('\nWord deleted from database.'));
+    } else {
+      console.log(chalk.gray('\nDeletion cancelled.'));
+    }
   }
 
   await pause();
@@ -339,8 +539,9 @@ export async function markAsMastered(data) {
   clearScreen();
   console.log(chalk.cyan.bold('\n=== Mastery Management ===\n'));
 
-  const learningWords = data.words.filter(w => !w.mastered);
-  const masteredWords = data.words.filter(w => w.mastered);
+  const learningEntries = data._vocabulary.learningEntries;
+  const learningWords = learningEntries.filter(e => !e.mastered);
+  const masteredWords = learningEntries.filter(e => e.mastered);
 
   console.log(chalk.gray(`Learning: ${learningWords.length} | Mastered: ${masteredWords.length}\n`));
 
@@ -361,14 +562,16 @@ export async function markAsMastered(data) {
       return;
     }
 
-    const wordChoices = learningWords.map(w => {
-      const finnish = Array.isArray(w.finnish) ? w.finnish.join(' / ') : w.finnish;
-      const english = Array.isArray(w.english) ? w.english.join(' / ') : w.english;
+    const wordChoices = learningWords.map(entry => {
+      const word = data._database.words.find(w => w.id === entry.wordId);
+      if (!word) return null;
+      const finnish = formatField(word.finnish);
+      const english = formatField(word.english);
       return {
         name: `${finnish} - ${english}`,
-        value: w.id
+        value: entry.wordId
       };
-    });
+    }).filter(Boolean);
 
     const selectedIds = await numberedMultiSelect(
       'Select words to mark as mastered:',
@@ -377,26 +580,34 @@ export async function markAsMastered(data) {
 
     if (selectedIds.length > 0) {
       selectedIds.forEach(id => {
+        const entry = data._vocabulary.learningEntries.find(e => e.wordId === id);
+        if (entry) {
+          entry.mastered = true;
+          entry.masteredAt = new Date().toISOString();
+        }
+        // Update merged word too
         const word = data.words.find(w => w.id === id);
         if (word) {
           word.mastered = true;
-          word.masteredAt = new Date().toISOString();
+          word.masteredAt = entry.masteredAt;
         }
       });
-      saveData(data);
+      saveVocabulary(data._vocabulary);
       console.log(chalk.green(`\n${selectedIds.length} word(s) marked as mastered!`));
     }
   }
 
   if (action === 'reset') {
-    const wordChoices = masteredWords.map(w => {
-      const finnish = Array.isArray(w.finnish) ? w.finnish.join(' / ') : w.finnish;
-      const english = Array.isArray(w.english) ? w.english.join(' / ') : w.english;
+    const wordChoices = masteredWords.map(entry => {
+      const word = data._database.words.find(w => w.id === entry.wordId);
+      if (!word) return null;
+      const finnish = formatField(word.finnish);
+      const english = formatField(word.english);
       return {
         name: `${finnish} - ${english}`,
-        value: w.id
+        value: entry.wordId
       };
-    });
+    }).filter(Boolean);
 
     const selectedIds = await numberedMultiSelect(
       'Select words to reset (move back to learning):',
@@ -405,6 +616,14 @@ export async function markAsMastered(data) {
 
     if (selectedIds.length > 0) {
       selectedIds.forEach(id => {
+        const entry = data._vocabulary.learningEntries.find(e => e.wordId === id);
+        if (entry) {
+          entry.mastered = false;
+          entry.masteredAt = null;
+          entry.streakFiEn = 0;
+          entry.streakEnFi = 0;
+        }
+        // Update merged word too
         const word = data.words.find(w => w.id === id);
         if (word) {
           word.mastered = false;
@@ -413,7 +632,7 @@ export async function markAsMastered(data) {
           word.streakEnFi = 0;
         }
       });
-      saveData(data);
+      saveVocabulary(data._vocabulary);
       console.log(chalk.yellow(`\n${selectedIds.length} word(s) moved back to learning!`));
     }
   }

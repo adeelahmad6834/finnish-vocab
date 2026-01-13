@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { saveData } from './data.js';
+import { saveDatabase, saveVocabulary, addToLearning, createEmptyLearningEntry } from './data.js';
 import { detectCategory } from './categories.js';
 import {
   generateCSVContent, parseCSVLine, getExportPath, listCSVFiles, getRootDir
@@ -12,16 +12,36 @@ export async function exportToCSV(data) {
   clearScreen();
   console.log(chalk.cyan.bold('\n=== Export to CSV ===\n'));
 
-  if (data.words.length === 0) {
-    console.log(chalk.yellow('No words to export.'));
-    await pause();
-    return;
+  // Export options: database words or learning words
+  const sourceChoice = await numberedMenu('Export from:', [
+    { name: 'My learning words (with progress)', value: 'learning' },
+    { name: 'Full database (definitions only)', value: 'database' },
+    { name: 'Back', value: 'back' }
+  ]);
+
+  if (sourceChoice === 'back' || !sourceChoice) return;
+
+  let sourceWords;
+  if (sourceChoice === 'learning') {
+    sourceWords = data.words.filter(w => w.isLearning);
+    if (sourceWords.length === 0) {
+      console.log(chalk.yellow('No words in your learning list.'));
+      await pause();
+      return;
+    }
+  } else {
+    sourceWords = data._database.words;
+    if (sourceWords.length === 0) {
+      console.log(chalk.yellow('No words in database.'));
+      await pause();
+      return;
+    }
   }
 
   const exportType = await numberedMenu('What to export?', [
-    { name: `All words (${data.words.length})`, value: 'all' },
+    { name: `All (${sourceWords.length})`, value: 'all' },
     { name: 'Only mastered words', value: 'mastered' },
-    { name: 'Only learning words', value: 'learning' },
+    { name: 'Only learning words', value: 'in_progress' },
     { name: 'By category', value: 'category' },
     { name: 'Back', value: 'back' }
   ]);
@@ -32,24 +52,24 @@ export async function exportToCSV(data) {
   let filename = 'finnish-vocabulary';
 
   if (exportType === 'all') {
-    wordsToExport = data.words;
-    filename = 'finnish-vocabulary-all';
+    wordsToExport = sourceWords;
+    filename = sourceChoice === 'learning' ? 'my-vocabulary-all' : 'database-all';
   } else if (exportType === 'mastered') {
-    wordsToExport = data.words.filter(w => w.mastered);
-    filename = 'finnish-vocabulary-mastered';
-  } else if (exportType === 'learning') {
-    wordsToExport = data.words.filter(w => !w.mastered);
-    filename = 'finnish-vocabulary-learning';
+    wordsToExport = sourceWords.filter(w => w.mastered);
+    filename = 'my-vocabulary-mastered';
+  } else if (exportType === 'in_progress') {
+    wordsToExport = sourceWords.filter(w => !w.mastered);
+    filename = 'my-vocabulary-learning';
   } else if (exportType === 'category') {
     const categoryChoices = data.categories
       .map(cat => ({ name: cat, value: cat }))
-      .filter(c => data.words.some(w => w.category === c.value));
+      .filter(c => sourceWords.some(w => w.category === c.value));
 
     const category = await numberedMenu('Select category:', categoryChoices);
     if (!category) return;
 
-    wordsToExport = data.words.filter(w => w.category === category);
-    filename = `finnish-vocabulary-${category.replace(/\s+/g, '-')}`;
+    wordsToExport = sourceWords.filter(w => w.category === category);
+    filename = `vocabulary-${category.replace(/\s+/g, '-')}`;
   }
 
   if (wordsToExport.length === 0) {
@@ -108,6 +128,17 @@ export async function importFromCSV(data) {
     return;
   }
 
+  // Ask if words should auto-add to learning
+  const { autoLearn } = await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'autoLearn',
+      message: 'Auto-add imported words to your learning list? (Y/n):',
+      default: 'y'
+    }
+  ]);
+  const shouldAutoLearn = autoLearn.toLowerCase() !== 'n';
+
   try {
     const content = fs.readFileSync(filePath, 'utf-8');
     const lines = content.split('\n').filter(line => line.trim());
@@ -160,7 +191,8 @@ export async function importFromCSV(data) {
         continue;
       }
 
-      const existing = data.words.find(w => {
+      // Check if word exists in database
+      const existing = data._database.words.find(w => {
         const finnishVals = Array.isArray(w.finnish) ? w.finnish : [w.finnish];
         return finnishVals.some(f => f.toLowerCase() === finnish.toLowerCase());
       });
@@ -171,7 +203,7 @@ export async function importFromCSV(data) {
           continue;
         } else if (dupAction === 'u') {
           updateExistingWord(existing, values, {
-            englishIdx, categoryIdx, exampleIdx, notesIdx, masteredIdx
+            englishIdx, categoryIdx, exampleIdx, notesIdx
           }, english);
           updated++;
           continue;
@@ -188,7 +220,7 @@ export async function importFromCSV(data) {
 
           if (action.toLowerCase().charAt(0) === 'u') {
             updateExistingWord(existing, values, {
-              englishIdx, categoryIdx, exampleIdx, notesIdx, masteredIdx
+              englishIdx, categoryIdx, exampleIdx, notesIdx
             }, english);
             updated++;
           } else {
@@ -198,7 +230,7 @@ export async function importFromCSV(data) {
         }
       }
 
-      // Create new word
+      // Create new word in database
       let category = categoryIdx !== -1 && values[categoryIdx]
         ? values[categoryIdx].trim()
         : null;
@@ -207,7 +239,8 @@ export async function importFromCSV(data) {
         category = detectCategory(finnish, english) || 'other';
       }
 
-      if (!data.categories.includes(category)) {
+      if (!data._database.categories.includes(category)) {
+        data._database.categories.push(category);
         data.categories.push(category);
       }
 
@@ -218,22 +251,52 @@ export async function importFromCSV(data) {
         category,
         example: exampleIdx !== -1 ? (values[exampleIdx]?.trim() || '') : '',
         notes: notesIdx !== -1 ? (values[notesIdx]?.trim() || '') : '',
-        mastered: masteredIdx !== -1 ? values[masteredIdx]?.toLowerCase() === 'true' : false,
-        practiceCount: 0,
-        correctCount: 0,
         addedAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       };
 
-      data.words.push(newWord);
+      data._database.words.push(newWord);
+
+      // Add to merged words list
+      const mergedWord = {
+        ...newWord,
+        isLearning: false,
+        mastered: false,
+        practiceCount: 0,
+        correctCount: 0
+      };
+      data.words.push(mergedWord);
+
+      // Auto-add to learning if requested
+      if (shouldAutoLearn) {
+        const isMastered = masteredIdx !== -1 && values[masteredIdx]?.toLowerCase() === 'true';
+        const entry = createEmptyLearningEntry(newWord.id);
+        entry.mastered = isMastered;
+        if (isMastered) {
+          entry.masteredAt = new Date().toISOString();
+        }
+        data._vocabulary.learningEntries.push(entry);
+
+        // Update merged word
+        mergedWord.isLearning = true;
+        mergedWord.mastered = isMastered;
+        Object.assign(mergedWord, entry);
+      }
+
       imported++;
     }
 
-    data.stats.totalWordsAdded += imported;
-    saveData(data);
+    // Save both databases
+    saveDatabase(data._database);
+    if (shouldAutoLearn) {
+      saveVocabulary(data._vocabulary);
+    }
 
     console.log(chalk.green(`\nImport complete:`));
-    console.log(`  - Imported: ${chalk.green(imported)} new words`);
+    console.log(`  - Imported: ${chalk.green(imported)} new words to database`);
+    if (shouldAutoLearn) {
+      console.log(`  - Added to learning list: ${chalk.cyan(imported)} words`);
+    }
     console.log(`  - Updated: ${chalk.yellow(updated)} existing words`);
     console.log(`  - Skipped: ${chalk.gray(skipped)} (duplicates or invalid)`);
 
@@ -244,9 +307,9 @@ export async function importFromCSV(data) {
   await pause();
 }
 
-// Helper function to update existing word from CSV
+// Helper function to update existing word from CSV (database only)
 function updateExistingWord(existing, values, indices, english) {
-  const { categoryIdx, exampleIdx, notesIdx, masteredIdx } = indices;
+  const { categoryIdx, exampleIdx, notesIdx } = indices;
 
   existing.english = english;
 
@@ -258,9 +321,6 @@ function updateExistingWord(existing, values, indices, english) {
   }
   if (notesIdx !== -1 && values[notesIdx]) {
     existing.notes = values[notesIdx].trim();
-  }
-  if (masteredIdx !== -1) {
-    existing.mastered = values[masteredIdx]?.toLowerCase() === 'true';
   }
 
   existing.updatedAt = new Date().toISOString();

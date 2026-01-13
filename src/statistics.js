@@ -5,14 +5,19 @@ export async function viewStatistics(data) {
   clearScreen();
   console.log(chalk.cyan.bold('\n=== Statistics ===\n'));
 
-  const total = data.words.length;
-  const mastered = data.words.filter(w => w.mastered).length;
-  const learning = total - mastered;
+  const totalInDatabase = data._database.words.length;
+  const learningEntries = data._vocabulary.learningEntries;
+  const totalLearning = learningEntries.length;
+  const mastered = learningEntries.filter(e => e.mastered).length;
+  const learning = totalLearning - mastered;
 
-  // Calculate category statistics
+  // Get learning words with merged data
+  const learningWords = data.words.filter(w => w.isLearning);
+
+  // Calculate category statistics (from learning words only)
   const categoryStats = {};
   data.categories.forEach(cat => {
-    const words = data.words.filter(w => w.category === cat);
+    const words = learningWords.filter(w => w.category === cat);
     if (words.length > 0) {
       categoryStats[cat] = {
         total: words.length,
@@ -23,17 +28,18 @@ export async function viewStatistics(data) {
 
   // Display overview
   console.log(chalk.white.bold('Overview:'));
-  console.log(`  Total words: ${chalk.cyan(total)}`);
-  console.log(`  Mastered: ${chalk.green(mastered)} (${total > 0 ? Math.round((mastered / total) * 100) : 0}%)`);
-  console.log(`  Learning: ${chalk.yellow(learning)}`);
-  console.log(`  Practice sessions: ${chalk.cyan(data.stats.totalPracticeSessions)}`);
+  console.log(`  Database: ${chalk.cyan(totalInDatabase)} words available`);
+  console.log(`  Learning: ${chalk.yellow(totalLearning)} words`);
+  console.log(`    - Mastered: ${chalk.green(mastered)} (${totalLearning > 0 ? Math.round((mastered / totalLearning) * 100) : 0}%)`);
+  console.log(`    - In progress: ${chalk.yellow(learning)}`);
+  console.log(`  Practice sessions: ${chalk.cyan(data._vocabulary.stats.totalPracticeSessions)}`);
 
-  if (data.stats.lastPracticeDate) {
-    console.log(`  Last practice: ${new Date(data.stats.lastPracticeDate).toLocaleString()}`);
+  if (data._vocabulary.stats.lastPracticeDate) {
+    console.log(`  Last practice: ${new Date(data._vocabulary.stats.lastPracticeDate).toLocaleString()}`);
   }
 
   // Display category breakdown
-  console.log(chalk.white.bold('\nBy Category:'));
+  console.log(chalk.white.bold('\nBy Category (Learning):'));
 
   const table = new Table({
     head: [
@@ -57,11 +63,11 @@ export async function viewStatistics(data) {
   if (Object.keys(categoryStats).length > 0) {
     console.log(table.toString());
   } else {
-    console.log(chalk.gray('  No words added yet.'));
+    console.log(chalk.gray('  No words in your learning list yet.'));
   }
 
   // Most practiced words
-  const mostPracticed = [...data.words]
+  const mostPracticed = [...learningWords]
     .filter(w => w.practiceCount > 0)
     .sort((a, b) => b.practiceCount - a.practiceCount)
     .slice(0, 5);
@@ -78,7 +84,7 @@ export async function viewStatistics(data) {
   }
 
   // Words needing attention (low accuracy)
-  const needsAttention = [...data.words]
+  const needsAttention = [...learningWords]
     .filter(w => w.practiceCount >= 3 && (w.correctCount / w.practiceCount) < 0.5)
     .slice(0, 5);
 

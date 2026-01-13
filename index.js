@@ -3,7 +3,8 @@
 // Main application entry point
 // This file handles the main menu and routes to feature modules
 
-import { loadData, getQuickStats } from './src/data.js';
+import { loadMergedData, getQuickStats } from './src/data.js';
+import { needsMigration, migrateToSplitDatabase } from './src/migrate.js';
 import { getReviewStats } from './src/sm2.js';
 import { getDailyProgressSummary } from './src/dailyGoals.js';
 import { clearScreen, displayHeader, pause, chalk, inquirer } from './src/ui.js';
@@ -12,7 +13,7 @@ import { createBackup } from './src/backup.js';
 // Feature modules
 import { practiceMode } from './src/practice.js';
 import {
-  addWord, listAllWords, listByCategory, listAlphabetically,
+  addWord, browseDatabase, listAllWords, listByCategory, listAlphabetically,
   searchWords, editWord, deleteWord, markAsMastered
 } from './src/words.js';
 import { viewStatistics } from './src/statistics.js';
@@ -26,11 +27,12 @@ async function mainMenu(data) {
 
   // Quick stats summary
   const stats = getQuickStats(data);
-  const reviewStats = getReviewStats(data.words);
+  const learningWords = data.words.filter(w => w.isLearning);
+  const reviewStats = getReviewStats(learningWords);
 
-  console.log(chalk.gray(`Total words: ${stats.total} | Mastered: ${stats.mastered} | Learning: ${stats.learning}`));
+  console.log(chalk.gray(`Database: ${stats.totalInDatabase} | Learning: ${stats.totalLearning} | Mastered: ${stats.mastered}`));
 
-  // Review status
+  // Review status (only for learning words)
   if (reviewStats.dueNow > 0) {
     console.log(
       chalk.yellow(`Reviews due: ${reviewStats.dueNow} now`) +
@@ -60,41 +62,43 @@ async function mainMenu(data) {
 
   // Menu options
   console.log(chalk.white('  [1]  Add new word'));
-  console.log(chalk.white('  [2]  List all words'));
-  console.log(chalk.white('  [3]  List by category'));
-  console.log(chalk.white('  [4]  List alphabetically'));
-  console.log(chalk.white('  [5]  Search words'));
-  console.log(chalk.white('  [6]  Edit a word'));
-  console.log(chalk.white('  [7]  Delete a word'));
-  console.log(chalk.white('  [8]  Mark as mastered'));
-  console.log(chalk.white('  [9]  Practice mode'));
-  console.log(chalk.white('  [10] View statistics'));
-  console.log(chalk.white('  [11] Manage categories'));
-  console.log(chalk.white('  [12] Daily goals'));
-  console.log(chalk.white('  [13] Export to CSV'));
-  console.log(chalk.white('  [14] Import from CSV'));
+  console.log(chalk.white('  [2]  Browse database'));
+  console.log(chalk.white('  [3]  My learning words'));
+  console.log(chalk.white('  [4]  List by category'));
+  console.log(chalk.white('  [5]  List alphabetically'));
+  console.log(chalk.white('  [6]  Search words'));
+  console.log(chalk.white('  [7]  Edit a word'));
+  console.log(chalk.white('  [8]  Delete a word'));
+  console.log(chalk.white('  [9]  Mark as mastered'));
+  console.log(chalk.white('  [10] Practice mode'));
+  console.log(chalk.white('  [11] View statistics'));
+  console.log(chalk.white('  [12] Manage categories'));
+  console.log(chalk.white('  [13] Daily goals'));
+  console.log(chalk.white('  [14] Export to CSV'));
+  console.log(chalk.white('  [15] Import from CSV'));
   console.log(chalk.white('  [0]  Exit'));
   console.log('');
 
   const { choice } = await inquirer.prompt([
-    { type: 'input', name: 'choice', message: 'Enter your choice (0-14):' }
+    { type: 'input', name: 'choice', message: 'Enter your choice (0-15):' }
   ]);
 
   const menuMap = {
     '1': 'add',
-    '2': 'listAll',
-    '3': 'listCategory',
-    '4': 'listAlpha',
-    '5': 'search',
-    '6': 'edit',
-    '7': 'delete',
-    '8': 'master',
-    '9': 'practice',
-    '10': 'stats',
-    '11': 'categories',
-    '12': 'dailyGoals',
-    '13': 'export',
-    '14': 'import',
+    '2': 'browse',
+    '3': 'listAll',
+    '4': 'listCategory',
+    '5': 'listAlpha',
+    '6': 'search',
+    '7': 'edit',
+    '8': 'delete',
+    '9': 'master',
+    '10': 'practice',
+    '11': 'stats',
+    '12': 'categories',
+    '13': 'dailyGoals',
+    '14': 'export',
+    '15': 'import',
     '0': 'exit'
   };
 
@@ -103,11 +107,28 @@ async function mainMenu(data) {
 
 // Main application loop
 async function main() {
+  // Check for and run migration if needed
+  if (needsMigration()) {
+    console.log(chalk.yellow('\nDetected old data format. Running migration...'));
+    const migrated = migrateToSplitDatabase();
+    if (!migrated) {
+      console.log(chalk.red('Migration failed. Please check your data files.'));
+      process.exit(1);
+    }
+  }
+
   // Create backup on startup
   console.log(chalk.gray('Creating startup backup...'));
   createBackup('startup');
 
-  let data = loadData();
+  let data = loadMergedData();
+
+  // Check for orphaned entries
+  if (data.orphanedEntries.length > 0) {
+    console.log(chalk.yellow(`\nNote: ${data.orphanedEntries.length} words in your learning list no longer exist in the database.`));
+    console.log(chalk.gray('These words may have been removed from the shared database.'));
+    await pause();
+  }
 
   while (true) {
     clearScreen();
@@ -116,6 +137,9 @@ async function main() {
     switch (choice) {
       case 'add':
         await addWord(data);
+        break;
+      case 'browse':
+        await browseDatabase(data);
         break;
       case 'listAll':
         await listAllWords(data);
@@ -163,12 +187,12 @@ async function main() {
         console.log(chalk.cyan('\nNakemiin! (Goodbye!)\n'));
         process.exit(0);
       default:
-        console.log(chalk.yellow('\nInvalid choice. Please enter a number 0-14.'));
+        console.log(chalk.yellow('\nInvalid choice. Please enter a number 0-15.'));
         await pause();
     }
 
     // Reload data after each operation
-    data = loadData();
+    data = loadMergedData();
   }
 }
 
