@@ -59,18 +59,19 @@ Daily: ○ 1/3 new | ○ 5/10 practiced
 
   [1]  Add new word
   [2]  Browse database        <-- Browse all words, add to learning list
-  [3]  List my words          <-- Your personal learning list
+  [3]  My learning words      <-- Your personal learning list
   [4]  List by category
-  [5]  Search words
-  [6]  Edit a word
-  [7]  Delete a word
-  [8]  Mark as mastered
-  [9]  Practice mode
-  [10] View statistics
-  [11] Manage categories
-  [12] Daily goals
-  [13] Export to CSV
-  [14] Import from CSV
+  [5]  List alphabetically
+  [6]  Search words
+  [7]  Edit a word
+  [8]  Delete a word
+  [9]  Mark as mastered
+  [10] Practice mode
+  [11] View statistics
+  [12] Manage categories
+  [13] Daily goals
+  [14] Export to CSV
+  [15] Import from CSV
   [0]  Exit
 ```
 
