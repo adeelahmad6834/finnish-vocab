@@ -1,7 +1,7 @@
 {
   "name": "finnish-vocab",
-  "version": "1.0.0",
-  "description": "Finnish vocabulary tracker with categories, search, and practice mode",
+  "version": "2.0.0",
+  "description": "Finnish vocabulary tracker with 127 pre-built entries, spaced repetition (SM-2), and smart practice modes",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"

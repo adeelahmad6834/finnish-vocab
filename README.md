@@ -1,10 +1,12 @@
 # Finnish Vocabulary Tracker
 
-A command-line application for learning Finnish vocabulary with spaced repetition, progress tracking, and smart practice modes.
+A command-line application for learning Finnish vocabulary with spaced repetition, progress tracking, and smart practice modes. Comes with **127 pre-built entries** covering question words, pronouns, common phrases, and spoken Finnish.
 
 ## Features
 
-- **Vocabulary Management**: Add, edit, delete, and search Finnish-English word pairs
+- **Split Database Architecture**: Shareable word definitions (tracked in git) + private learning progress (gitignored)
+- **127 Pre-built Entries**: Question words, pronouns, common phrases, and spoken Finnish variants
+- **Entry Types**: Supports words, phrases, sentences, and expressions
 - **Smart Categories**: Auto-detects categories based on Finnish word patterns and English meanings
 - **SM-2 Spaced Repetition**: Scientifically-proven algorithm that schedules reviews at optimal intervals
 - **Bidirectional Practice**: Practice Finnish→English and English→Finnish with streak tracking
@@ -17,7 +19,8 @@ A command-line application for learning Finnish vocabulary with spaced repetitio
 ## Installation
 
 ```bash
-# Clone or navigate to the project directory
+# Clone the repository
+git clone https://github.com/adeelahmad6834/finnish-vocab.git
 cd finnish-vocab
 
 # Install dependencies
@@ -50,14 +53,14 @@ node index.js
 |     Opi suomea - Learn Finnish!         |
 +------------------------------------------+
 
-Total words: 11 | Mastered: 3 | Learning: 8
+Database: 127 words | Learning: 45 | Mastered: 12
 Reviews due: 5 now | 2 later today | 4 this week
 Daily: ○ 1/3 new | ○ 5/10 practiced
 
   [1]  Add new word
-  [2]  List all words
-  [3]  List by category
-  [4]  List alphabetically
+  [2]  Browse database        <-- Browse all words, add to learning list
+  [3]  List my words          <-- Your personal learning list
+  [4]  List by category
   [5]  Search words
   [6]  Edit a word
   [7]  Delete a word
@@ -71,7 +74,51 @@ Daily: ○ 1/3 new | ○ 5/10 practiced
   [0]  Exit
 ```
 
-### Practice Modes
+## Database Architecture
+
+The app uses a **split database** design:
+
+### database.json (Tracked in Git - Shareable)
+Contains word definitions that can be shared via GitHub:
+- Finnish word/phrase
+- English translation(s)
+- Category
+- Entry type (word/phrase/sentence/expression)
+- Example sentences
+- Usage notes
+
+### vocabulary.json (Gitignored - Private)
+Contains your personal learning progress:
+- Which words you're learning
+- Practice counts and accuracy
+- Mastery status
+- SM-2 scheduling data (ease factor, intervals, next review date)
+
+This means you can:
+- **Pull updates** from GitHub to get new words without losing your progress
+- **Share your database** without exposing your learning history
+- **Start fresh** by deleting vocabulary.json while keeping all word definitions
+
+## Pre-built Content
+
+The database includes **127 entries** across these categories:
+
+| Category | Count | Description |
+|----------|-------|-------------|
+| Question words | 35 | mitä, missä, milloin, kuinka paljon, etc. |
+| Pronouns | 39 | Personal, possessive, demonstrative, reflexive |
+| Common phrases | 44 | Greetings, polite expressions, useful sentences |
+| Spoken Finnish | 9 | Colloquial forms: mä, sä, mite, joo, etc. |
+
+### Entry Types
+
+Each entry has a `type` field:
+- **word**: Single words (mitä, minä, kiitos)
+- **phrase**: Multi-word expressions (kuinka paljon, ei hätää)
+- **sentence**: Complete sentences (Puhutko englantia?)
+- **expression**: Exclamations and reactions (Hienoa!, Voi ei!)
+
+## Practice Modes
 
 1. **Due for Review (SM-2)**: Practice words scheduled for review based on spaced repetition
 2. **Smart Practice**: Prioritizes words with lower accuracy and longer time since last practice
@@ -114,13 +161,12 @@ The app automatically creates backups of your data:
 - **On exit**: Creates a `backup_exit_*` snapshot when you quit
 
 Backups are stored in the `backups/` folder and include:
-- `vocabulary.json` - All your words and progress
+- `database.json` - Word definitions
+- `vocabulary.json` - Your learning progress
 - `daily-goals.json` - Daily goal settings and progress
 - `backup-info.json` - Metadata about when the backup was created
 
 **Automatic cleanup**: Only the last 10 backups are kept to save disk space.
-
-To restore from a backup manually, copy the files from a backup folder to the main directory.
 
 ## Project Structure
 
@@ -128,24 +174,27 @@ To restore from a backup manually, copy the files from a backup folder to the ma
 finnish-vocab/
 ├── index.js                  # Main entry point (menu routing only)
 ├── package.json              # Dependencies and scripts
-├── vocabulary.json           # Word database (auto-created)
-├── daily-goals.json          # Daily progress (auto-created)
+├── database.json             # Word definitions (tracked in git)
+├── vocabulary.json           # Personal progress (gitignored)
+├── daily-goals.json          # Daily progress (gitignored)
 ├── README.md
-├── backups/                  # Automatic backups (auto-created)
+├── backups/                  # Automatic backups (gitignored)
 │   └── backup_startup_2026-01-09_10-30-00/
+│       ├── database.json
 │       ├── vocabulary.json
 │       ├── daily-goals.json
 │       └── backup-info.json
 └── src/
     ├── config.js             # Constants and configuration
-    ├── data.js               # Data loading/saving functions
+    ├── data.js               # Data loading/saving (dual-file system)
+    ├── migrate.js            # Migration from old single-file format
     ├── sm2.js                # SM-2 spaced repetition algorithm
     ├── ui.js                 # UI helpers and prompts
     ├── backup.js             # Backup/restore functionality
     │
     │   Feature Modules:
     ├── practice.js           # Practice mode functionality
-    ├── words.js              # Word CRUD operations
+    ├── words.js              # Word CRUD operations + browse database
     ├── statistics.js         # Statistics view
     ├── categories.js         # Category auto-detection
     ├── categoryManager.js    # Category management UI
@@ -157,18 +206,46 @@ finnish-vocab/
 
 ## Data Format
 
-### vocabulary.json
+### database.json (Shareable)
 
 ```json
 {
+  "version": 1,
   "words": [
     {
-      "id": 1704067200000,
-      "finnish": "kiitos",
-      "english": "thank you",
-      "category": "greetings",
-      "example": "Kiitos paljon!",
-      "notes": "One of the most important words",
+      "id": 1736800000001,
+      "finnish": "mitä",
+      "english": "what",
+      "category": "question words",
+      "type": "word",
+      "example": "Mitä teet? (What are you doing?)",
+      "notes": "Used for things, actions",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000040,
+      "finnish": ["minä", "mä"],
+      "english": "I",
+      "category": "pronouns",
+      "type": "word",
+      "example": "Minä olen opiskelija. (I am a student.)",
+      "notes": "Subject pronoun. Spoken: mä. Often dropped as verb shows person."
+    }
+  ],
+  "categories": ["question words", "pronouns", "common phrases", "spoken finnish", ...]
+}
+```
+
+### vocabulary.json (Private)
+
+```json
+{
+  "version": 1,
+  "learningEntries": [
+    {
+      "wordId": 1736800000001,
+      "startedLearningAt": "2026-01-13T10:00:00.000Z",
       "mastered": false,
       "practiceCount": 5,
       "correctCount": 4,
@@ -176,14 +253,12 @@ finnish-vocab/
       "streakEnFi": 1,
       "easeFactor": 2.5,
       "interval": 3,
-      "nextReviewDate": "2026-01-12T00:00:00.000Z"
+      "nextReviewDate": "2026-01-16T00:00:00.000Z"
     }
   ],
-  "categories": ["greetings", "numbers", "food & drinks", ...],
   "stats": {
-    "totalWordsAdded": 50,
     "totalPracticeSessions": 12,
-    "lastPracticeDate": "2026-01-09T10:30:00.000Z"
+    "lastPracticeDate": "2026-01-13T10:30:00.000Z"
   }
 }
 ```
@@ -193,13 +268,14 @@ finnish-vocab/
 For import/export:
 
 ```csv
-finnish,english,category,example,notes,mastered
-kiitos,thank you,greetings,Kiitos paljon!,Important word,false
-hei,hello,greetings,Hei! Mitä kuuluu?,Informal,false
+finnish,english,category,type,example,notes,mastered
+mitä,what,question words,word,Mitä teet?,Used for things,false
+kuinka paljon,how much,question words,phrase,Kuinka paljon se maksaa?,Uncountable nouns,false
 ```
 
 ## Built-in Categories
 
+- question words, pronouns, common phrases, spoken finnish
 - grocery, weather, automobiles, body parts
 - greetings, numbers, colors, food & drinks
 - family, animals, verbs, adjectives, other
@@ -208,18 +284,30 @@ New categories can be added when adding words.
 
 ## Auto-Category Detection
 
-The app recognizes 100+ common Finnish words and automatically suggests categories:
+The app recognizes 150+ common Finnish words and automatically suggests categories:
 
 - Finnish patterns: verb endings (-da, -dä), adjective endings (-inen, -nen)
-- English keywords: "milk" → grocery, "sun" → weather, "hand" → body parts
+- Finnish words: "mitä" → question words, "minä" → pronouns
+- English keywords: "what" → question words, "I/you/he" → pronouns
 
 ## Tips for Effective Learning
 
-1. **Practice daily**: Even 5-10 minutes helps retention
-2. **Use the SM-2 reviews**: Do your due reviews first each day
-3. **Add example sentences**: Context helps memory
-4. **Practice both directions**: Finnish→English AND English→Finnish
-5. **Don't skip difficult words**: The algorithm will show them more often
+1. **Start with Browse Database**: Add words you want to learn to your personal list
+2. **Practice daily**: Even 5-10 minutes helps retention
+3. **Use the SM-2 reviews**: Do your due reviews first each day
+4. **Learn phrases, not just words**: The common phrases are essential for conversation
+5. **Practice both directions**: Finnish→English AND English→Finnish
+6. **Don't skip difficult words**: The algorithm will show them more often
+
+## Contributing
+
+The word database (`database.json`) is tracked in git. To contribute new words:
+
+1. Fork the repository
+2. Add words to `database.json`
+3. Submit a pull request
+
+Your learning progress (`vocabulary.json`) is gitignored and won't be included in commits.
 
 ## Dependencies
 
