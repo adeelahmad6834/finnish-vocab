@@ -32,9 +32,13 @@ export const DEFAULT_CATEGORIES = [
   'adjectives',
   'question words',
   'pronouns',
+  'common phrases',
   'spoken finnish',
   'other'
 ];
+
+// Entry types
+export const ENTRY_TYPES = ['word', 'phrase', 'sentence', 'expression'];
 
 // Auto-mastery settings
 export const MASTERY_CONFIG = {
@@ -148,5 +152,6 @@ export const ENGLISH_CATEGORY_KEYWORDS = {
   'adjectives': ['good', 'bad', 'big', 'small', 'new', 'old', 'young', 'beautiful', 'ugly', 'fast', 'slow', 'easy', 'hard', 'happy', 'sad', 'tired', 'hungry'],
   'question words': ['what', 'where', 'when', 'who', 'whom', 'why', 'how', 'which', 'how many', 'how much', 'how long', 'how often', 'how far', 'how old', 'how big', 'how fast'],
   'pronouns': ['i', 'you', 'he', 'she', 'it', 'we', 'they', 'me', 'him', 'her', 'us', 'them', 'my', 'your', 'his', 'her', 'its', 'our', 'their', 'this', 'that', 'these', 'those', 'myself', 'yourself', 'himself', 'herself', 'itself', 'ourselves', 'themselves', 'who', 'which', 'someone', 'something', 'anyone', 'anything', 'everyone', 'everything', 'nobody', 'nothing', 'self', 'oneself'],
+  'common phrases': ['how are you', 'nice to meet', 'excuse me', 'i understand', 'i don\'t understand', 'please', 'thank you', 'you\'re welcome', 'see you', 'take care', 'no problem', 'of course', 'i think', 'i know', 'i don\'t know', 'let\'s go', 'wait a moment', 'one moment', 'i\'m sorry', 'it doesn\'t matter', 'never mind'],
   'spoken finnish': ['spoken', 'colloquial', 'informal']
 };

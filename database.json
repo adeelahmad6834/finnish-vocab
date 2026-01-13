@@ -9,7 +9,8 @@
       "example": "Mitä teet? (What are you doing?)",
       "notes": "Used for things, actions",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000002,
@@ -19,7 +20,8 @@
       "example": "Missä olet? (Where are you?)",
       "notes": "Location - static position",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000003,
@@ -29,7 +31,8 @@
       "example": "Milloin tulet? (When are you coming?)",
       "notes": "Time - general",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000004,
@@ -39,7 +42,8 @@
       "example": "Kuka sinä olet? (Who are you?)",
       "notes": "Singular person",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000005,
@@ -52,7 +56,8 @@
       "example": "Ketä etsit? (Whom are you looking for?)",
       "notes": "Object form of kuka - kenet (accusative), ketä (partitive)",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000006,
@@ -62,7 +67,8 @@
       "example": "Miksi kysyt? (Why do you ask?)",
       "notes": "Reason",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000007,
@@ -72,7 +78,8 @@
       "example": "Miten menee? (How is it going?)",
       "notes": "Manner / method",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000008,
@@ -85,7 +92,8 @@
       "example": "Mikä tämä on? (What is this?)",
       "notes": "Often replaces mitä in identification",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000009,
@@ -95,7 +103,8 @@
       "example": "Mitkä ovat sinun? (Which ones are yours?)",
       "notes": "Plural of mikä",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000010,
@@ -105,7 +114,8 @@
       "example": "Kuinka monta lasta sinulla on? (How many children do you have?)",
       "notes": "Countable nouns",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000011,
@@ -115,7 +125,8 @@
       "example": "Kuinka paljon se maksaa? (How much does it cost?)",
       "notes": "Uncountable nouns",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000012,
@@ -125,7 +136,8 @@
       "example": "Kuinka kauan se kestää? (How long does it take?)",
       "notes": "Duration",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000013,
@@ -135,7 +147,8 @@
       "example": "Kuinka usein käyt lenkillä? (How often do you go for a run?)",
       "notes": "Frequency",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000014,
@@ -145,7 +158,8 @@
       "example": "Mistä olet kotoisin? (Where are you from?)",
       "notes": "Origin - movement from",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000015,
@@ -155,7 +169,8 @@
       "example": "Mihin olet menossa? (Where are you going?)",
       "notes": "Destination - movement to",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000016,
@@ -165,7 +180,8 @@
       "example": "Mihin aikaan tapaamme? (At what time do we meet?)",
       "notes": "Clock time",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000017,
@@ -175,7 +191,8 @@
       "example": "Kuinka kauan sitten se tapahtui? (How long ago did it happen?)",
       "notes": "Past duration",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000018,
@@ -185,7 +202,8 @@
       "example": "Milloin asti olet täällä? (Until when are you here?)",
       "notes": "End time",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000019,
@@ -195,7 +213,8 @@
       "example": "Millä tavalla voin auttaa? (In what way can I help?)",
       "notes": "Formal - method",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000020,
@@ -205,7 +224,8 @@
       "example": "Millä ehdolla hyväksyt? (Under what condition do you accept?)",
       "notes": "Formal usage",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000021,
@@ -215,7 +235,8 @@
       "example": "Kuinka iso talo on? (How big is the house?)",
       "notes": "Size",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000022,
@@ -225,7 +246,8 @@
       "example": "Kuinka vanha olet? (How old are you?)",
       "notes": "Age",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000023,
@@ -235,7 +257,8 @@
       "example": "Kuinka kaukana asema on? (How far is the station?)",
       "notes": "Distance",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000024,
@@ -245,7 +268,8 @@
       "example": "Kuinka nopeasti auto kulkee? (How fast does the car go?)",
       "notes": "Speed",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000025,
@@ -255,7 +279,8 @@
       "example": "Kuinka hyvä tämä on? (How good is this?)",
       "notes": "Quality - positive",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000026,
@@ -265,7 +290,8 @@
       "example": "Kuinka huono tilanne on? (How bad is the situation?)",
       "notes": "Quality - negative",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000027,
@@ -279,7 +305,8 @@
       "example": "Onko sinulla aikaa? (Do you have time?)",
       "notes": "Verb-initial yes/no question",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000028,
@@ -289,7 +316,8 @@
       "example": "Eikö ole kaunista? (Isn't it beautiful?)",
       "notes": "Negative question",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000029,
@@ -299,7 +327,8 @@
       "example": "Se on hyvä, eikö niin? (It's good, right?)",
       "notes": "Confirmation question",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000030,
@@ -309,7 +338,8 @@
       "example": "Kahvia vai teetä? (Coffee or tea?)",
       "notes": "Used in questions - alternative choice",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000031,
@@ -319,7 +349,8 @@
       "example": "Voitko auttaa minua? (Can you help me?)",
       "notes": "Polite request",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000032,
@@ -329,7 +360,8 @@
       "example": "Voisitko odottaa hetken? (Could you wait a moment?)",
       "notes": "More polite request",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000033,
@@ -339,7 +371,8 @@
       "example": "Saanko kysyä jotain? (May I ask something?)",
       "notes": "Permission",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000034,
@@ -349,7 +382,8 @@
       "example": "Onko sinulla kynää? (Do you have a pen?)",
       "notes": "Possession question",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000035,
@@ -359,7 +393,8 @@
       "example": "Onko täällä WC:tä? (Is there a toilet here?)",
       "notes": "Existence question",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000036,
@@ -372,7 +407,8 @@
       "example": "Mite menee? (How's it going? - spoken)",
       "notes": "Spoken form of miten",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000037,
@@ -382,7 +418,8 @@
       "example": "Miks sä kysyt? (Why are you asking? - spoken)",
       "notes": "Spoken form of miksi",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000038,
@@ -392,7 +429,8 @@
       "example": "Mis sä oot? (Where are you? - spoken)",
       "notes": "Spoken form of missä",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000039,
@@ -402,47 +440,65 @@
       "example": "Millon tuut? (When are you coming? - spoken)",
       "notes": "Spoken form of milloin",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000040,
-      "finnish": ["minä", "mä"],
+      "finnish": [
+        "minä",
+        "mä"
+      ],
       "english": "I",
       "category": "pronouns",
       "example": "Minä olen opiskelija. (I am a student.)",
       "notes": "Subject pronoun. Spoken: mä. Often dropped as verb shows person.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000041,
-      "finnish": ["sinä", "sä"],
+      "finnish": [
+        "sinä",
+        "sä"
+      ],
       "english": "you (singular)",
       "category": "pronouns",
       "example": "Sinä olet kaunis. (You are beautiful.)",
       "notes": "Subject pronoun singular. Spoken: sä.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000042,
       "finnish": "hän",
-      "english": ["he", "she"],
+      "english": [
+        "he",
+        "she"
+      ],
       "category": "pronouns",
       "example": "Hän on opettaja. (He/She is a teacher.)",
       "notes": "Same word for both genders. Formal/polite. In speech, often replaced by 'se'.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000043,
       "finnish": "se",
-      "english": ["it", "he", "she"],
+      "english": [
+        "it",
+        "he",
+        "she"
+      ],
       "category": "pronouns",
       "example": "Se on hyvä. (It is good.) / Se tulee kohta. (He/She is coming soon.)",
       "notes": "Used for objects AND people in spoken Finnish. Normal and not rude.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000044,
@@ -452,27 +508,36 @@
       "example": "Me olemme ystäviä. (We are friends.)",
       "notes": "Subject pronoun. Same in standard and spoken Finnish.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000045,
       "finnish": "te",
-      "english": ["you (plural)", "you (formal)"],
+      "english": [
+        "you (plural)",
+        "you (formal)"
+      ],
       "category": "pronouns",
       "example": "Te olette tervetulleita. (You are welcome.)",
       "notes": "Plural OR formal singular (customer service, official situations).",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000046,
-      "finnish": ["he", "ne"],
+      "finnish": [
+        "he",
+        "ne"
+      ],
       "english": "they",
       "category": "pronouns",
       "example": "He tulevat huomenna. (They are coming tomorrow.)",
       "notes": "he = standard/formal, ne = spoken. ne also used for objects.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000047,
@@ -482,7 +547,8 @@
       "example": "Hän näki minut. (He/She saw me.)",
       "notes": "Object form of minä. Used when 'I' receives the action.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000048,
@@ -492,17 +558,22 @@
       "example": "Minä rakastan sinut. (I love you.)",
       "notes": "Object form of sinä.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000049,
       "finnish": "hänet",
-      "english": ["him", "her"],
+      "english": [
+        "him",
+        "her"
+      ],
       "category": "pronouns",
       "example": "Näin hänet eilen. (I saw him/her yesterday.)",
       "notes": "Object form of hän. Same word for both genders.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000050,
@@ -512,7 +583,8 @@
       "example": "Otan sen. (I'll take it.)",
       "notes": "Object form of se. Also used for people in spoken Finnish.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000051,
@@ -522,7 +594,8 @@
       "example": "Hän kutsui meidät. (He/She invited us.)",
       "notes": "Object form of me.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000052,
@@ -532,47 +605,64 @@
       "example": "Näen teidät huomenna. (I'll see you tomorrow.)",
       "notes": "Object form of te.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000053,
-      "finnish": ["heidät", "ne"],
+      "finnish": [
+        "heidät",
+        "ne"
+      ],
       "english": "them",
       "category": "pronouns",
       "example": "Tapaan heidät myöhemmin. (I'll meet them later.)",
       "notes": "heidät = formal, ne = spoken/objects.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000054,
-      "finnish": ["minun", "mun"],
+      "finnish": [
+        "minun",
+        "mun"
+      ],
       "english": "my",
       "category": "pronouns",
       "example": "Minun nimi on... (My name is...)",
       "notes": "Possessive. Spoken: mun. Often dropped when possession is clear.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000055,
-      "finnish": ["sinun", "sun"],
+      "finnish": [
+        "sinun",
+        "sun"
+      ],
       "english": "your (singular)",
       "category": "pronouns",
       "example": "Sinun auto on hieno. (Your car is nice.)",
       "notes": "Possessive singular. Spoken: sun.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000056,
       "finnish": "hänen",
-      "english": ["his", "her"],
+      "english": [
+        "his",
+        "her"
+      ],
       "category": "pronouns",
       "example": "Hänen talo on suuri. (His/Her house is big.)",
       "notes": "Possessive. Same word for both genders.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000057,
@@ -582,7 +672,8 @@
       "example": "Sen väri on punainen. (Its color is red.)",
       "notes": "Possessive for objects. Also used for people in spoken Finnish.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000058,
@@ -592,7 +683,8 @@
       "example": "Meidän koti on täällä. (Our home is here.)",
       "notes": "Possessive plural.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000059,
@@ -602,17 +694,22 @@
       "example": "Teidän lapset ovat kilttejä. (Your children are nice.)",
       "notes": "Possessive plural/formal.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000060,
-      "finnish": ["heidän", "niiden"],
+      "finnish": [
+        "heidän",
+        "niiden"
+      ],
       "english": "their",
       "category": "pronouns",
       "example": "Heidän koira on iso. (Their dog is big.)",
       "notes": "heidän = people, niiden = objects/spoken.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000061,
@@ -622,7 +719,8 @@
       "example": "Tämä on hyvä. (This is good.)",
       "notes": "Demonstrative - near/pointing. In real life, 'se' is used more often.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000062,
@@ -632,7 +730,8 @@
       "example": "Tuo on kaunis. (That is beautiful.)",
       "notes": "Demonstrative - visible but farther away.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000063,
@@ -642,7 +741,8 @@
       "example": "Nämä ovat minun. (These are mine.)",
       "notes": "Demonstrative plural - near.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000064,
@@ -652,37 +752,53 @@
       "example": "Nuo ovat kalliita. (Those are expensive.)",
       "notes": "Demonstrative plural - farther away.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000065,
       "finnish": "ne",
-      "english": ["those", "they (things)"],
+      "english": [
+        "those",
+        "they (things)"
+      ],
       "category": "pronouns",
       "example": "Ne ovat pöydällä. (Those/They are on the table.)",
       "notes": "Most common in real speech for 'those' and 'they'.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000066,
       "finnish": "itse",
-      "english": ["myself", "yourself", "oneself", "self"],
+      "english": [
+        "myself",
+        "yourself",
+        "oneself",
+        "self"
+      ],
       "category": "pronouns",
       "example": "Teen sen itse. (I'll do it myself.)",
       "notes": "Reflexive/emphatic. Same word for all persons.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000067,
       "finnish": "joka",
-      "english": ["who", "which", "that"],
+      "english": [
+        "who",
+        "which",
+        "that"
+      ],
       "category": "pronouns",
       "example": "Mies, joka tuli... (The man who came...)",
       "notes": "Relative pronoun. One word replaces English who/which/that.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000068,
@@ -692,7 +808,8 @@
       "example": "Joku soitti. (Someone called.)",
       "notes": "Indefinite - unknown person.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000069,
@@ -702,7 +819,8 @@
       "example": "Jokin tapahtui. (Something happened.)",
       "notes": "Indefinite - unknown thing.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000070,
@@ -712,7 +830,8 @@
       "example": "Kuka tahansa voi tehdä sen. (Anyone can do it.)",
       "notes": "Indefinite - doesn't matter who.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000071,
@@ -722,17 +841,23 @@
       "example": "Mikä tahansa käy. (Anything goes.)",
       "notes": "Indefinite - doesn't matter what.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000072,
       "finnish": "kaikki",
-      "english": ["everyone", "everything", "all"],
+      "english": [
+        "everyone",
+        "everything",
+        "all"
+      ],
       "category": "pronouns",
       "example": "Kaikki ovat täällä. (Everyone is here.)",
       "notes": "Can mean everyone, everything, or all depending on context.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000073,
@@ -742,7 +867,8 @@
       "example": "Ei kukaan tiedä. (Nobody knows.)",
       "notes": "Finnish uses double negative structure.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000074,
@@ -752,7 +878,8 @@
       "example": "Ei mitään hätää. (Nothing to worry about.)",
       "notes": "Finnish uses double negative structure.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "phrase"
     },
     {
       "id": 1736800000075,
@@ -762,7 +889,8 @@
       "example": "Mä tuun kohta. (I'm coming soon.)",
       "notes": "Spoken form of minä. Very common in daily speech.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000076,
@@ -772,7 +900,8 @@
       "example": "Sä oot kiva. (You're nice.)",
       "notes": "Spoken form of sinä. Very common in daily speech.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000077,
@@ -782,7 +911,8 @@
       "example": "Mun kaveri tulee. (My friend is coming.)",
       "notes": "Spoken form of minun.",
       "addedAt": "2026-01-13T00:00:00.000Z",
-      "updatedAt": "2026-01-13T00:00:00.000Z"
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
     },
     {
       "id": 1736800000078,
@@ -791,6 +921,617 @@
       "category": "spoken finnish",
       "example": "Sun puhelin soi. (Your phone is ringing.)",
       "notes": "Spoken form of sinun.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z",
+      "type": "word"
+    },
+    {
+      "id": 1736800000079,
+      "finnish": [
+        "Mitä kuuluu?",
+        "Miten menee?"
+      ],
+      "english": "How are you?",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Hei! Mitä kuuluu? (Hi! How are you?)",
+      "notes": "Mitä kuuluu = formal. Miten menee / Mites menee = casual.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000080,
+      "finnish": "Kiitos, hyvää.",
+      "english": [
+        "I'm fine, thanks.",
+        "Good, thanks."
+      ],
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Mitä kuuluu? - Kiitos, hyvää.",
+      "notes": "Standard response. Can also say: Ihan hyvää (quite good).",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000081,
+      "finnish": "Hauska tavata.",
+      "english": "Nice to meet you.",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Minä olen Matti. Hauska tavata!",
+      "notes": "Used when meeting someone for the first time.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000082,
+      "finnish": "Hauska tutustua.",
+      "english": "Nice to get to know you.",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Hauska tutustua sinuun!",
+      "notes": "Slightly more formal than hauska tavata.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000083,
+      "finnish": [
+        "Nähdään!",
+        "Nähdään pian!"
+      ],
+      "english": [
+        "See you!",
+        "See you soon!"
+      ],
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Moi moi! Nähdään huomenna!",
+      "notes": "Common casual goodbye.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000084,
+      "finnish": "Hyvää päivää!",
+      "english": "Good day!",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Hyvää päivää! Voinko auttaa?",
+      "notes": "Formal greeting, often used in shops/services.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000085,
+      "finnish": "Hyvää huomenta!",
+      "english": "Good morning!",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Hyvää huomenta! Nukuitko hyvin?",
+      "notes": "Morning greeting. Spoken: Huomenta!",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000086,
+      "finnish": "Hyvää iltaa!",
+      "english": "Good evening!",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Hyvää iltaa! Tervetuloa!",
+      "notes": "Evening greeting. Spoken: Iltaa!",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000087,
+      "finnish": "Hyvää yötä!",
+      "english": "Good night!",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Hyvää yötä! Nuku hyvin!",
+      "notes": "Said before going to bed.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000088,
+      "finnish": "Ole hyvä.",
+      "english": [
+        "You're welcome.",
+        "Here you go.",
+        "Please."
+      ],
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Kiitos! - Ole hyvä.",
+      "notes": "Multi-purpose: response to thanks, offering something, or \"please\".",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000089,
+      "finnish": "Anteeksi.",
+      "english": [
+        "Excuse me.",
+        "I'm sorry.",
+        "Pardon."
+      ],
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Anteeksi, missä on vessa?",
+      "notes": "Used for apologies and getting attention.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000090,
+      "finnish": "Ei se mitään.",
+      "english": [
+        "It doesn't matter.",
+        "No problem.",
+        "Never mind."
+      ],
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Anteeksi! - Ei se mitään.",
+      "notes": "Very common response to apologies.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000091,
+      "finnish": "Ei hätää.",
+      "english": [
+        "No worries.",
+        "Don't worry.",
+        "No problem."
+      ],
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Olen myöhässä! - Ei hätää.",
+      "notes": "Reassuring phrase. Literally: No emergency.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000092,
+      "finnish": "Totta kai.",
+      "english": "Of course.",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Voitko auttaa? - Totta kai!",
+      "notes": "Emphatic agreement.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000093,
+      "finnish": "Selvä.",
+      "english": [
+        "Okay.",
+        "Clear.",
+        "Got it."
+      ],
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Tule kello viisi. - Selvä!",
+      "notes": "Very common acknowledgment.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000094,
+      "finnish": "Ymmärrän.",
+      "english": "I understand.",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Ymmärrän mitä tarkoitat.",
+      "notes": "From verb ymmärtää (to understand).",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000095,
+      "finnish": "En ymmärrä.",
+      "english": "I don't understand.",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Anteeksi, en ymmärrä suomea.",
+      "notes": "Useful for learners. En = I don't.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000096,
+      "finnish": "En tiedä.",
+      "english": "I don't know.",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Missä on asema? - En tiedä.",
+      "notes": "From verb tietää (to know facts).",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000097,
+      "finnish": "Tiedän.",
+      "english": "I know.",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Tiedän missä se on.",
+      "notes": "From verb tietää (to know facts).",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000098,
+      "finnish": "Luulen niin.",
+      "english": "I think so.",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Onko hän kotona? - Luulen niin.",
+      "notes": "From verb luulla (to think/believe).",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000099,
+      "finnish": "En usko.",
+      "english": "I don't think so.",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Tuleeko hän? - En usko.",
+      "notes": "From verb uskoa (to believe).",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000100,
+      "finnish": "Voitko auttaa?",
+      "english": "Can you help?",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Anteeksi, voitko auttaa minua?",
+      "notes": "Polite request for help.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000101,
+      "finnish": "Odota hetki.",
+      "english": "Wait a moment.",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Odota hetki, tulen kohta.",
+      "notes": "Also: Hetkinen (one moment).",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000102,
+      "finnish": "Hetkinen.",
+      "english": "Just a moment.",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Hetkinen, tarkistan.",
+      "notes": "Very common in phone calls and service situations.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000103,
+      "finnish": "Mennään!",
+      "english": [
+        "Let's go!",
+        "Let's leave!"
+      ],
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Oletko valmis? Mennään!",
+      "notes": "From verb mennä (to go).",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000104,
+      "finnish": "Tule tänne.",
+      "english": "Come here.",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Tule tänne, haluan näyttää jotain.",
+      "notes": "Tänne = to here (direction).",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000105,
+      "finnish": "Hienoa!",
+      "english": [
+        "Great!",
+        "Awesome!",
+        "Wonderful!"
+      ],
+      "category": "common phrases",
+      "type": "expression",
+      "example": "Sain työpaikan! - Hienoa!",
+      "notes": "Positive exclamation.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000106,
+      "finnish": "Mahtavaa!",
+      "english": [
+        "Awesome!",
+        "Amazing!"
+      ],
+      "category": "common phrases",
+      "type": "expression",
+      "example": "Voitimme pelin! - Mahtavaa!",
+      "notes": "Strong positive reaction.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000107,
+      "finnish": "Voi ei!",
+      "english": "Oh no!",
+      "category": "common phrases",
+      "type": "expression",
+      "example": "Bussi lähti! - Voi ei!",
+      "notes": "Expression of dismay.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000108,
+      "finnish": "Oikeasti?",
+      "english": "Really?",
+      "category": "common phrases",
+      "type": "expression",
+      "example": "Hän muutti Suomeen. - Oikeasti?",
+      "notes": "Expression of surprise/disbelief.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000109,
+      "finnish": "Todellako?",
+      "english": "Really? (formal)",
+      "category": "common phrases",
+      "type": "expression",
+      "example": "Hän voitti lotossa! - Todellako?",
+      "notes": "More formal than oikeasti.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000110,
+      "finnish": "Paljon kiitoksia!",
+      "english": "Thank you very much!",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Paljon kiitoksia avusta!",
+      "notes": "More emphatic than just kiitos.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000111,
+      "finnish": "Kiitos paljon!",
+      "english": "Thanks a lot!",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Kiitos paljon! Olet kiltti.",
+      "notes": "Same meaning as paljon kiitoksia.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000112,
+      "finnish": "Olen pahoillani.",
+      "english": "I'm sorry.",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Olen pahoillani menetyksestäsi.",
+      "notes": "Sincere apology or condolence.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000113,
+      "finnish": "Ei haittaa.",
+      "english": "It doesn't matter.",
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Unohdin sen. - Ei haittaa.",
+      "notes": "Response to minor problems.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000114,
+      "finnish": "Sopii!",
+      "english": [
+        "Sounds good!",
+        "Deal!",
+        "That works!"
+      ],
+      "category": "common phrases",
+      "type": "expression",
+      "example": "Tavataan kello kuusi? - Sopii!",
+      "notes": "Agreement to a plan.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000115,
+      "finnish": "Ei sovi.",
+      "english": [
+        "That doesn't work.",
+        "That's not okay."
+      ],
+      "category": "common phrases",
+      "type": "phrase",
+      "example": "Maanantai? - Ei sovi, olen töissä.",
+      "notes": "Declining a suggestion.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000116,
+      "finnish": "Puhutko englantia?",
+      "english": "Do you speak English?",
+      "category": "common phrases",
+      "type": "sentence",
+      "example": "Anteeksi, puhutko englantia?",
+      "notes": "Useful for travelers.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000117,
+      "finnish": "Puhun vähän suomea.",
+      "english": "I speak a little Finnish.",
+      "category": "common phrases",
+      "type": "sentence",
+      "example": "Puhun vähän suomea, mutta opiskelen!",
+      "notes": "Useful phrase for learners.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000118,
+      "finnish": "Voitko puhua hitaammin?",
+      "english": "Can you speak more slowly?",
+      "category": "common phrases",
+      "type": "sentence",
+      "example": "Anteeksi, voitko puhua hitaammin?",
+      "notes": "Essential for learners.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000119,
+      "finnish": "Voitko toistaa?",
+      "english": "Can you repeat?",
+      "category": "common phrases",
+      "type": "sentence",
+      "example": "En kuullut. Voitko toistaa?",
+      "notes": "When you didn't hear or understand.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000120,
+      "finnish": "Mitä se tarkoittaa?",
+      "english": "What does that mean?",
+      "category": "common phrases",
+      "type": "sentence",
+      "example": "Mitä \"kaunis\" tarkoittaa?",
+      "notes": "Asking for word meaning.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000121,
+      "finnish": "Miten sanotaan...?",
+      "english": "How do you say...?",
+      "category": "common phrases",
+      "type": "sentence",
+      "example": "Miten sanotaan \"thank you\" suomeksi?",
+      "notes": "Asking for translation.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000122,
+      "finnish": [
+        "Joo",
+        "Juu"
+      ],
+      "english": "Yeah",
+      "category": "spoken finnish",
+      "type": "expression",
+      "example": "Tuletko mukaan? - Joo!",
+      "notes": "Casual yes. Very common in speech.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000123,
+      "finnish": "Niin",
+      "english": [
+        "So",
+        "Yes",
+        "Indeed"
+      ],
+      "category": "spoken finnish",
+      "type": "expression",
+      "example": "Niin, mitä sä halusit?",
+      "notes": "Filler word, also means agreement.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000124,
+      "finnish": "No niin",
+      "english": [
+        "Well then",
+        "So",
+        "Alright"
+      ],
+      "category": "spoken finnish",
+      "type": "expression",
+      "example": "No niin, aloitetaan!",
+      "notes": "Very Finnish expression. Multi-purpose.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000125,
+      "finnish": "Niinku",
+      "english": [
+        "Like",
+        "You know"
+      ],
+      "category": "spoken finnish",
+      "type": "expression",
+      "example": "Se oli niinku tosi hyvä.",
+      "notes": "Filler word in spoken Finnish.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000126,
+      "finnish": "Ihan",
+      "english": [
+        "Quite",
+        "Really",
+        "Totally"
+      ],
+      "category": "spoken finnish",
+      "type": "word",
+      "example": "Se on ihan hyvä. / Ihan sama.",
+      "notes": "Intensifier. Ihan sama = whatever/same difference.",
+      "addedAt": "2026-01-13T00:00:00.000Z",
+      "updatedAt": "2026-01-13T00:00:00.000Z"
+    },
+    {
+      "id": 1736800000127,
+      "finnish": "Ihan sama.",
+      "english": [
+        "Whatever.",
+        "I don't care.",
+        "Same difference."
+      ],
+      "category": "spoken finnish",
+      "type": "phrase",
+      "example": "Otatko kahvia vai teetä? - Ihan sama.",
+      "notes": "Common casual expression.",
       "addedAt": "2026-01-13T00:00:00.000Z",
       "updatedAt": "2026-01-13T00:00:00.000Z"
     }
@@ -810,6 +1551,7 @@
     "adjectives",
     "question words",
     "pronouns",
+    "common phrases",
     "spoken finnish",
     "other"
   ]
