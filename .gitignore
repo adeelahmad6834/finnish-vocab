@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Backups (contains personal progress data)
+backups/
+
+# Daily goals (personal data)
+daily-goals.json
+
+# OS files
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+
+# CSV exports
+*.csv

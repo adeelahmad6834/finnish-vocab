@@ -1,0 +1,18 @@
+{
+  "name": "finnish-vocab",
+  "version": "1.0.0",
+  "description": "Finnish vocabulary tracker with categories, search, and practice mode",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": ["finnish", "vocabulary", "language-learning"],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "cli-table3": "^0.6.5",
+    "inquirer": "^13.1.0"
+  }
+}
