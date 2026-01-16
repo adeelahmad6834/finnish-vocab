@@ -45,6 +45,7 @@ export async function practiceMode(data) {
   }
   modeChoices.push(
     { name: 'Smart Practice (prioritizes weak words)', value: 'smart' },
+    { name: 'Practice by Category', value: 'category' },
     { name: 'Finnish -> English', value: 'fi-en' },
     { name: 'English -> Finnish', value: 'en-fi' },
     { name: 'Mixed (both directions)', value: 'mixed' }
@@ -56,6 +57,12 @@ export async function practiceMode(data) {
 
   const mode = await numberedMenu('Select practice type:', modeChoices);
   if (mode === 'back' || mode === null) return;
+
+  // Handle category practice separately
+  if (mode === 'category') {
+    await practiceByCategory(data, learningWords);
+    return;
+  }
 
   const includeMastered = mode === 'review';
   let wordsToUse = mode === 'sm2-review'
@@ -91,6 +98,79 @@ export async function practiceMode(data) {
   const result = await runPracticeSession(wordsToUse, mode, data);
 
   // Update stats (save to vocabulary only)
+  data._vocabulary.stats.totalPracticeSessions++;
+  data._vocabulary.stats.lastPracticeDate = new Date().toISOString();
+  data.stats = data._vocabulary.stats;
+  saveVocabulary(data._vocabulary);
+  updateDailyGoalsPractice(result.total, result.correct);
+
+  // Display results
+  displayPracticeResults(result, data);
+
+  await pause();
+}
+
+// Practice by category - select a category and practice words from it
+async function practiceByCategory(data, learningWords) {
+  // Group learning words by category
+  const categoryGroups = {};
+  for (const word of learningWords) {
+    const cat = word.category || 'other';
+    if (!categoryGroups[cat]) {
+      categoryGroups[cat] = [];
+    }
+    categoryGroups[cat].push(word);
+  }
+
+  // Build category choices with word counts
+  const categories = Object.keys(categoryGroups).sort();
+  if (categories.length === 0) {
+    console.log(chalk.yellow('\nNo categories with learning words.'));
+    await pause();
+    return;
+  }
+
+  const categoryChoices = categories.map(cat => ({
+    name: `${cat} (${categoryGroups[cat].length} words)`,
+    value: cat
+  }));
+  categoryChoices.push({ name: 'Back', value: 'back' });
+
+  const selectedCategory = await numberedMenu('Select a category:', categoryChoices);
+  if (selectedCategory === 'back' || selectedCategory === null) return;
+
+  const categoryWords = categoryGroups[selectedCategory];
+  console.log(chalk.cyan(`\nPracticing ${categoryWords.length} words from "${selectedCategory}"\n`));
+
+  // Select direction
+  const directionChoices = [
+    { name: 'Finnish -> English', value: 'fi-en' },
+    { name: 'English -> Finnish', value: 'en-fi' },
+    { name: 'Mixed (both directions)', value: 'mixed' },
+    { name: 'Back', value: 'back' }
+  ];
+
+  const direction = await numberedMenu('Select practice direction:', directionChoices);
+  if (direction === 'back' || direction === null) return;
+
+  // Select word count
+  const maxWords = categoryWords.length;
+  const countChoices = [];
+  if (maxWords >= 5) countChoices.push({ name: '5 words', value: 5 });
+  if (maxWords >= 10) countChoices.push({ name: '10 words', value: 10 });
+  if (maxWords >= 20) countChoices.push({ name: '20 words', value: 20 });
+  countChoices.push({ name: `All ${maxWords} words`, value: maxWords });
+
+  const count = await numberedMenu('How many words?', countChoices);
+  if (!count) return;
+
+  // Shuffle and limit words
+  let wordsToUse = shuffleArray([...categoryWords]).slice(0, count);
+
+  // Run practice session
+  const result = await runPracticeSession(wordsToUse, direction, data);
+
+  // Update stats
   data._vocabulary.stats.totalPracticeSessions++;
   data._vocabulary.stats.lastPracticeDate = new Date().toISOString();
   data.stats = data._vocabulary.stats;
@@ -165,10 +245,19 @@ function getDisplayString(value) {
 }
 
 // Helper to check if user answer matches any of the valid answers
+// Accepts base word without parenthetical clarifications (e.g., "where" matches "where (at)")
 function checkAnswer(userAnswer, validAnswers) {
   const normalized = userAnswer.toLowerCase().trim();
   const answers = toArray(validAnswers);
-  return answers.some(ans => ans.toLowerCase() === normalized);
+  return answers.some(ans => {
+    const ansLower = ans.toLowerCase();
+    // Exact match
+    if (ansLower === normalized) return true;
+    // Match base word without parenthetical (e.g., "where (at)" -> "where")
+    const baseWord = ansLower.replace(/\s*\([^)]*\)\s*/g, '').trim();
+    if (baseWord === normalized) return true;
+    return false;
+  });
 }
 
 // Ask a single question and process the answer
